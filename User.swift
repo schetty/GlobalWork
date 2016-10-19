@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class User {
+struct User {
     
     let uid: String
     let email: String
@@ -24,17 +24,6 @@ class User {
         self.email = email
     }
     
-    
-    
-    class Traveler: User {
-        
-    }
-    
-    
-    
-    class Host: User {
-        
-    }
     
     
 }

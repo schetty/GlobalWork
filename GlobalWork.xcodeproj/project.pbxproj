@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3906E5371DB1791500107108 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E5361DB1791500107108 /* AppDelegate.swift */; };
-		3906E53C1DB1791500107108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3906E53A1DB1791500107108 /* Main.storyboard */; };
 		3906E53E1DB1791500107108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3906E53D1DB1791500107108 /* Assets.xcassets */; };
 		3906E5411DB1791500107108 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3906E53F1DB1791500107108 /* LaunchScreen.storyboard */; };
 		3906E5671DB1834500107108 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E5661DB1834500107108 /* LoginViewController.swift */; };
@@ -29,6 +28,10 @@
 		3906E58C1DB5A49500107108 /* HostDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E58B1DB5A49500107108 /* HostDashboardViewController.swift */; };
 		3906E5911DB5B2EB00107108 /* TravelersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E5901DB5B2EB00107108 /* TravelersTableViewController.swift */; };
 		3906E5931DB5B2F900107108 /* HostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E5921DB5B2F900107108 /* HostsTableViewController.swift */; };
+		3906E59B1DB6A92D00107108 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E5991DB6A92D00107108 /* SSRadioButton.swift */; };
+		3906E59C1DB6A92D00107108 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E59A1DB6A92D00107108 /* SSRadioButtonsController.swift */; };
+		3906E59E1DB6AD2D00107108 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E59D1DB6AD2D00107108 /* Stylesheet.swift */; };
+		3906E5A11DB6E2AA00107108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3906E59F1DB6E2AA00107108 /* Main.storyboard */; };
 		FB4BE1F26A9F7C2CCBC697C2 /* Pods_GlobalWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB9FF0D369460D67246CE6B /* Pods_GlobalWork.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +39,6 @@
 		0FB9FF0D369460D67246CE6B /* Pods_GlobalWork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GlobalWork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3906E5331DB1791500107108 /* GlobalWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlobalWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3906E5361DB1791500107108 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3906E53B1DB1791500107108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3906E53D1DB1791500107108 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3906E5401DB1791500107108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3906E5421DB1791500107108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +60,11 @@
 		3906E58B1DB5A49500107108 /* HostDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostDashboardViewController.swift; sourceTree = "<group>"; };
 		3906E5901DB5B2EB00107108 /* TravelersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelersTableViewController.swift; sourceTree = "<group>"; };
 		3906E5921DB5B2F900107108 /* HostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsTableViewController.swift; sourceTree = "<group>"; };
+		3906E5991DB6A92D00107108 /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
+		3906E59A1DB6A92D00107108 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButtonsController.swift; sourceTree = "<group>"; };
+		3906E59D1DB6AD2D00107108 /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
+		3906E5A01DB6E2AA00107108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3906E5A21DB6F15800107108 /* GlobalWork.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GlobalWork.entitlements; sourceTree = "<group>"; };
 		5D1BEC83EB2DBF20B30D926E /* Pods-GlobalWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalWork.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalWork/Pods-GlobalWork.release.xcconfig"; sourceTree = "<group>"; };
 		D70F19D27A9B2D4F5FC28AE9 /* Pods-GlobalWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalWork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalWork/Pods-GlobalWork.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +102,7 @@
 		3906E5351DB1791500107108 /* GlobalWork */ = {
 			isa = PBXGroup;
 			children = (
+				3906E5A21DB6F15800107108 /* GlobalWork.entitlements */,
 				3906E56A1DB5610600107108 /* Model */,
 				3906E5841DB568FC00107108 /* TableViewCells */,
 				3906E5771DB564E100107108 /* Views */,
@@ -107,11 +115,14 @@
 		3906E56A1DB5610600107108 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3906E5991DB6A92D00107108 /* SSRadioButton.swift */,
+				3906E59A1DB6A92D00107108 /* SSRadioButtonsController.swift */,
 				3906E56B1DB5611C00107108 /* User.swift */,
 				3906E56F1DB5645200107108 /* Message.swift */,
 				3906E5711DB5649D00107108 /* Profile.swift */,
 				3906E5731DB564B500107108 /* Feedback.swift */,
 				3906E5751DB564C200107108 /* Conversations.swift */,
+				3906E59D1DB6AD2D00107108 /* Stylesheet.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -131,8 +142,8 @@
 		3906E5781DB5650500107108 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3906E53A1DB1791500107108 /* Main.storyboard */,
 				3906E53F1DB1791500107108 /* LaunchScreen.storyboard */,
+				3906E59F1DB6E2AA00107108 /* Main.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -249,6 +260,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = ZCPWTKWTW9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -278,7 +294,7 @@
 				3906E5411DB1791500107108 /* LaunchScreen.storyboard in Resources */,
 				3906E56E1DB5633100107108 /* GoogleService-Info.plist in Resources */,
 				3906E53E1DB1791500107108 /* Assets.xcassets in Resources */,
-				3906E53C1DB1791500107108 /* Main.storyboard in Resources */,
+				3906E5A11DB6E2AA00107108 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3906E5831DB568E900107108 /* TravelerDashboardViewController.swift in Sources */,
+				3906E59C1DB6A92D00107108 /* SSRadioButtonsController.swift in Sources */,
 				3906E5931DB5B2F900107108 /* HostsTableViewController.swift in Sources */,
 				3906E5881DB56AC700107108 /* TravelerTableViewCell.swift in Sources */,
 				3906E5861DB569D200107108 /* HostTableViewCell.swift in Sources */,
@@ -347,10 +364,12 @@
 				3906E57D1DB5684600107108 /* PublicHostProfileViewController.swift in Sources */,
 				3906E5721DB5649D00107108 /* Profile.swift in Sources */,
 				3906E5671DB1834500107108 /* LoginViewController.swift in Sources */,
+				3906E59E1DB6AD2D00107108 /* Stylesheet.swift in Sources */,
 				3906E5701DB5645200107108 /* Message.swift in Sources */,
 				3906E5911DB5B2EB00107108 /* TravelersTableViewController.swift in Sources */,
 				3906E5761DB564C200107108 /* Conversations.swift in Sources */,
 				3906E58A1DB577F300107108 /* SignUpViewController.swift in Sources */,
+				3906E59B1DB6A92D00107108 /* SSRadioButton.swift in Sources */,
 				3906E5741DB564B500107108 /* Feedback.swift in Sources */,
 				3906E5371DB1791500107108 /* AppDelegate.swift in Sources */,
 				3906E57F1DB5685E00107108 /* EditTravelerProfileViewController.swift in Sources */,
@@ -361,20 +380,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3906E53A1DB1791500107108 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3906E53B1DB1791500107108 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3906E53F1DB1791500107108 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3906E5401DB1791500107108 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3906E59F1DB6E2AA00107108 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3906E5A01DB6E2AA00107108 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -476,6 +495,7 @@
 			baseConfigurationReference = D70F19D27A9B2D4F5FC28AE9 /* Pods-GlobalWork.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GlobalWork/GlobalWork.entitlements;
 				DEVELOPMENT_TEAM = ZCPWTKWTW9;
 				INFOPLIST_FILE = GlobalWork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -490,6 +510,7 @@
 			baseConfigurationReference = 5D1BEC83EB2DBF20B30D926E /* Pods-GlobalWork.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GlobalWork/GlobalWork.entitlements;
 				DEVELOPMENT_TEAM = ZCPWTKWTW9;
 				INFOPLIST_FILE = GlobalWork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
