@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>GlobalWork would like to set a profile photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>GlobalWork would like to set a profile photo</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

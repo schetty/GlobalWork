@@ -52,12 +52,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if(FBSDKAccessToken.current() != nil) {
-            
-        }
-        let loginButton = FBSDKLoginButton()
-        loginButton.center = view.center
-        view.addSubview(loginButton)
+//        if(FBSDKAccessToken.current() != nil) {
+//            
+//        }
+//        let loginButton = FBSDKLoginButton()
+//        loginButton.center = view.center
+//        view.addSubview(loginButton)
     
     }
 
