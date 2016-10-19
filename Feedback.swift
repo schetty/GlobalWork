@@ -10,9 +10,22 @@ import UIKit
 
 class Feedback: NSObject {
     
-//    var feedbackStr:String = String()
-//    var fromUser:User
-//    
+    var feedbackStr:String? = String()
+    var fromUser:User?
+    
+    let test:String? = "bla"
+    
+    override init() {
+       super.init()
+    }
+    
+    func booyah() -> Void {
+
+
+    }
+    
+    
+//
 //    
 //    override init() {
 //        

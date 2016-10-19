@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
     
     
     
+    
     @IBOutlet var hostRadioButton: SSRadioButton!
     
     @IBOutlet var travelerRadioButton: SSRadioButton!
@@ -60,9 +61,9 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
                         print("User signed in")
                         let currentButton = self.radioButtonController?.selectedButton()
 
-                        self.didSelectButton(aButton: currentButton)
                         self.ref.child("data/users").updateChildValues(["\(FIRAuth.auth()!.currentUser!.uid)":["Username":self.usernameTextField.text!]])
                         
+                        self.setIsHost(aButton: currentButton)
                     }
                 })
                 
@@ -89,16 +90,19 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
         
         ref = FIRDatabase.database().reference()
         
+        
     }
     
-     public func didSelectButton(aButton: UIButton?) {
+     public func setIsHost(aButton: UIButton?) {
+        
+        let isHostRef = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/isHost")
         
         if (aButton == travelerRadioButton) {
-            self.ref.child("data/users").setValue(["\(FIRAuth.auth()!.currentUser!.uid)":["isHost":false]])
+            isHostRef.setValue(false)
         }
         
         else if (aButton == hostRadioButton) {
-            self.ref.child("data/users").setValue(["\(FIRAuth.auth()!.currentUser!.uid)":["isHost":true]])
+            isHostRef.setValue(true)
         }
             
         else {
