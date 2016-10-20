@@ -20,7 +20,7 @@ struct Profile {
     var userFeedbacks:[String]
     let profilePhotoURL:String = ""
     let age:int_fast64_t = int_fast64_t()
-    var datesHelpNeeded:NSDateInterval
+    var datesHelpNeeded:Array<String>
     let location:String
     let hostSitePhotoURL:String = String()
     

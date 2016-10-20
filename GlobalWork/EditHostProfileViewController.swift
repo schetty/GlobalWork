@@ -41,6 +41,11 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     @IBOutlet var october: SSRadioButton!
     @IBOutlet var november: SSRadioButton!
     @IBOutlet var december: SSRadioButton!
+    
+    var monthsNeeded = Set<String>()
+    /// public method below
+    
+    
         //text fields
     
     @IBOutlet var displayNameTextField: UITextField!
@@ -72,32 +77,38 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
 
     }
     
+    
     @IBAction func didPressSaveChanges(_ sender: UIButton) {
         
-  
-        
-        let dobStr = dateOfBirthTextField.text!
-        let loc = locationTextField.text!
-        let tagline = tagLineTextField.text?
+        let currentButton = self.radioButtonController?.selectedButton()
         
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dob = dateFormatter.date(from: dobStr)
+        self.setDatesHelpNeeded(aButton: currentButton)
+        print(self.monthsNeeded)
         
-        var data: NSData = NSData()
+//        let dobStr = dateOfBirthTextField.text!
+//        let loc = locationTextField.text!
+////        let tagline = tagLineTextField.text?
+//        
+//        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        let dob = dateFormatter.date(from: dobStr)
+//        
+//        var data: NSData = NSData()
         
-        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
+//        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
    
-        var userProfile = Profile(isHost: true, displayName: displayNameTextField.text?, countriesVisiting: "none", userDescription: descriptionTextView.text?, languagesSpoken: languagesTextField.text?, userFeedbacks: "", datesHelpNeeded: <#T##NSDateInterval#>, location: <#T##String#>)
+/*        var userProfile = Profile(isHost: true, displayName: displayNameTextField.text?, countriesVisiting: "none", userDescription: descriptionTextView.text?, languagesSpoken: languagesTextField.text?, userFeedbacks: "", datesHelpNeeded: , location: String) */
         
-        let profile = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profileInfo")
+//        let profile = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profileInfo")
 
 
         
     }
     
     @IBAction func didPressUploadPhoto(_ sender: UIButton) {
+        
     }
 
     
@@ -130,6 +141,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     //MARK: - Delegate Methods for Image Picking
         ////// NOT WORKING COME BACK TO THIS
     //private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
     
@@ -149,7 +161,57 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     
     
-    
+    func setDatesHelpNeeded(aButton:UIButton?) {
+        if (janurary.isSelected) {
+            self.monthsNeeded.insert("Janurary")
+        }
+        
+        if (february.isSelected) {
+            self.monthsNeeded.insert("February")
+        }
+        
+        if (march.isSelected) {
+            self.monthsNeeded.insert("March")
+        }
+        
+        if (april.isSelected) {
+            self.monthsNeeded.insert("April")
+        }
+        
+        if (may.isSelected) {
+            self.monthsNeeded.insert("May")
+        }
+
+        if (june.isSelected) {
+            self.monthsNeeded.insert("June")
+        }
+        
+        if (july.isSelected) {
+            self.monthsNeeded.insert("July")
+        }
+        
+        if (august.isSelected) {
+            self.monthsNeeded.insert("August")
+        }
+
+        if (september.isSelected) {
+            self.monthsNeeded.insert("September")
+        }
+        
+        if (october.isSelected) {
+            self.monthsNeeded.insert("October")
+        }
+        
+        if (november.isSelected) {
+            self.monthsNeeded.insert("November")
+        }
+        if (december.isSelected) {
+            self.monthsNeeded.insert("December")
+        }
+        else if (aButton == nil) {
+            self.monthsNeeded.insert("Your months are empty")
+    }
+}
     
     
     
