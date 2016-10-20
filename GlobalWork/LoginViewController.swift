@@ -37,6 +37,7 @@ class LoginViewController: UIViewController {
             
             FIRAuth.auth()?.addStateDidChangeListener { auth, user in
                 if user != nil {
+                    print(Thread.isMainThread)
             self.performSegue(withIdentifier: "showDashboard", sender: self)
                     
                     print("LOGGED IN YAY!")

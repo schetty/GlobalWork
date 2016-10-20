@@ -139,8 +139,6 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     
     //MARK: - Delegate Methods for Image Picking
-        ////// NOT WORKING COME BACK TO THIS
-    //private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
