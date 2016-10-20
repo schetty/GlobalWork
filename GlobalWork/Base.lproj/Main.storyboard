@@ -60,7 +60,7 @@
                     <connections>
                         <outlet property="passwordTextField" destination="79b-nv-RV0" id="aLe-1a-HPZ"/>
                         <outlet property="usernameTextField" destination="kF3-Fq-4fQ" id="Qbj-zE-6ed"/>
-                        <segue destination="10b-g6-M0D" kind="show" identifier="showDashboard" id="BWS-nu-tjb"/>
+                        <segue destination="10b-g6-M0D" kind="show" identifier="showDashboard" id="pjv-gA-IBg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -93,9 +93,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="where do you live?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="du2-EZ-Akv">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where do you live (city, country)?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="du2-EZ-Akv">
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
@@ -116,7 +116,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="current profile photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqO-22-ylB">
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.51372549020000002" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -142,12 +142,12 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4BP-bW-5el" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4BP-bW-5el" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
                                         <frame key="frameInset" minX="21" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -157,22 +157,22 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" ambiguous="YES" text="Feb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7R7-a9-uyp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Feb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7R7-a9-uyp">
                                         <frame key="frameInset" minX="53" minY="13" width="20" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYB-Av-lGm" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYB-Av-lGm" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
                                         <frame key="frameInset" minX="75" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -182,7 +182,7 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -192,12 +192,12 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9q-lf-9dR" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9q-lf-9dR" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
                                         <frame key="frameInset" minX="129" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -207,7 +207,7 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -217,12 +217,12 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vec-eH-rND" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vec-eH-rND" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
                                         <frame key="frameInset" minX="181" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -232,7 +232,7 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -242,12 +242,12 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-V4-45c" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-V4-45c" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
                                         <frame key="frameInset" minX="237" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -257,7 +257,7 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -267,12 +267,12 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ioo-z9-Nuz" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ioo-z9-Nuz" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
                                         <frame key="frameInset" minX="289" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -282,7 +282,7 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -297,12 +297,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76o-Rb-drh" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
-                                        <frame key="frameInset" minX="18" width="30" height="39"/>
+                                        <frame key="frameInset" minX="17" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                 <color key="value" red="0.0" green="0.6588235294117647" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
@@ -311,23 +308,20 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" ambiguous="YES" text="Aug" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxc-6v-Gv8">
-                                        <frame key="frameInset" minX="50" width="21" height="39"/>
+                                        <frame key="frameInset" minX="49" width="21" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niR-U3-rFG" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
-                                        <frame key="frameInset" minX="72" width="30" height="39"/>
+                                        <frame key="frameInset" minX="70" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                 <color key="value" red="0.0" green="0.6588235294117647" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
@@ -336,22 +330,22 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sep" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWt-Dp-xNN">
-                                        <frame key="frameInset" minX="104" width="21" height="39"/>
+                                        <frame key="frameInset" minX="102" width="21" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="758" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ8-0W-1YB" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
-                                        <frame key="frameInset" minX="127" width="30" height="39"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="757" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ8-0W-1YB" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="124" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
@@ -361,23 +355,20 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Oct" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-Wj-hGB">
-                                        <frame key="frameInset" minX="158" width="19" height="39"/>
+                                        <frame key="frameInset" minX="155" width="19" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKS-Xw-rbq" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
-                                        <frame key="frameInset" minX="179" width="30" height="39"/>
+                                        <frame key="frameInset" minX="176" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                 <color key="value" red="0.0078431372549019607" green="0.50196078431372548" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
@@ -386,23 +377,20 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAp-T2-jJI">
-                                        <frame key="frameInset" minX="211" width="21" height="39"/>
+                                        <frame key="frameInset" minX="207" width="21" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqt-JK-t4y" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
-                                        <frame key="frameInset" minX="234" width="30" height="39"/>
+                                        <frame key="frameInset" minX="229" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                 <color key="value" red="0.0078431372549019607" green="0.50196078431372548" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
@@ -411,23 +399,20 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Dec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6d-64-eF1">
-                                        <frame key="frameInset" minX="266" width="21" height="39"/>
+                                        <frame key="frameInset" minX="261" width="21" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFZ-yd-y84" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
-                                        <frame key="frameInset" minX="289" width="30" height="39"/>
+                                        <frame key="frameInset" minX="283" width="30" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                 <color key="value" red="0.0078431372549019607" green="0.50196078431372548" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
@@ -436,7 +421,7 @@
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
+                                                <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -469,7 +454,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="q9E-Zy-xqM"/>
+                                    <constraint firstAttribute="height" constant="67" id="q9E-Zy-xqM"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCV-GS-6NI">
@@ -484,7 +469,6 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I need help in months of:" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkt-9u-Enf">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -492,11 +476,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tMr-XU-aPF" firstAttribute="top" secondItem="VT4-2k-D1u" secondAttribute="bottom" constant="16" id="4g6-8k-HYh"/>
-                            <constraint firstItem="Tqm-ci-jFv" firstAttribute="top" secondItem="Jkt-9u-Enf" secondAttribute="bottom" constant="6" id="78G-VN-I4j"/>
+                            <constraint firstItem="tMr-XU-aPF" firstAttribute="top" secondItem="VT4-2k-D1u" secondAttribute="bottom" constant="20" id="4g6-8k-HYh"/>
+                            <constraint firstItem="Jkt-9u-Enf" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="12" id="9oO-hd-0IV"/>
                             <constraint firstItem="wwJ-U5-2iz" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="5" id="ECG-YD-2YJ"/>
                             <constraint firstItem="tMr-XU-aPF" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="15" id="F7W-YU-xT1"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VT4-2k-D1u" secondAttribute="trailing" constant="12" id="G0X-29-GOf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VT4-2k-D1u" secondAttribute="trailing" constant="10" id="G0X-29-GOf"/>
                             <constraint firstItem="TTk-ff-y6s" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="35" id="G9z-8U-ytY"/>
                             <constraint firstItem="TTk-ff-y6s" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="153" id="Hfa-Sc-S6P"/>
                             <constraint firstItem="bqO-22-ylB" firstAttribute="top" secondItem="W2g-BI-lwi" secondAttribute="bottom" id="J2e-zd-SrF"/>
@@ -506,16 +490,16 @@
                             <constraint firstItem="DpG-qi-LeJ" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="8" id="Sau-fr-XvL"/>
                             <constraint firstItem="DCV-GS-6NI" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="-20" id="U6b-iP-dM1"/>
                             <constraint firstItem="Tqm-ci-jFv" firstAttribute="top" secondItem="TTk-ff-y6s" secondAttribute="bottom" constant="35" id="Ug0-44-uyp"/>
-                            <constraint firstItem="DpG-qi-LeJ" firstAttribute="leading" secondItem="W2g-BI-lwi" secondAttribute="trailing" constant="60" id="UzM-Cx-MrQ"/>
+                            <constraint firstItem="DpG-qi-LeJ" firstAttribute="leading" secondItem="W2g-BI-lwi" secondAttribute="trailing" constant="45" id="UzM-Cx-MrQ"/>
                             <constraint firstItem="bqO-22-ylB" firstAttribute="top" secondItem="wwJ-U5-2iz" secondAttribute="bottom" id="W1B-kK-1Zj"/>
-                            <constraint firstItem="VT4-2k-D1u" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="12" id="YQ6-dv-iZO"/>
+                            <constraint firstItem="VT4-2k-D1u" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="20" id="YQ6-dv-iZO"/>
                             <constraint firstItem="wwJ-U5-2iz" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="5" id="bCn-l0-vxf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TTk-ff-y6s" secondAttribute="trailing" constant="15" id="eae-c7-8By"/>
                             <constraint firstItem="XQc-Io-RFJ" firstAttribute="top" secondItem="DCV-GS-6NI" secondAttribute="bottom" id="ekX-e8-saR"/>
-                            <constraint firstItem="Jkt-9u-Enf" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="12" id="koK-AT-Mrw"/>
                             <constraint firstItem="bqO-22-ylB" firstAttribute="centerX" secondItem="wwJ-U5-2iz" secondAttribute="centerX" id="nhe-eb-94G"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DpG-qi-LeJ" secondAttribute="trailing" constant="20" id="oSK-5V-SE2"/>
-                            <constraint firstItem="DpG-qi-LeJ" firstAttribute="leading" secondItem="wwJ-U5-2iz" secondAttribute="trailing" constant="20" id="pIs-tX-TU8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DpG-qi-LeJ" secondAttribute="trailing" constant="10" id="oSK-5V-SE2"/>
+                            <constraint firstItem="DpG-qi-LeJ" firstAttribute="leading" secondItem="wwJ-U5-2iz" secondAttribute="trailing" constant="12" id="pIs-tX-TU8"/>
+                            <constraint firstItem="Tqm-ci-jFv" firstAttribute="top" secondItem="Jkt-9u-Enf" secondAttribute="bottom" constant="-7" id="pbw-2D-bfg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Tqm-ci-jFv" secondAttribute="trailing" constant="12" id="sR0-8m-mzm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DCV-GS-6NI" secondAttribute="trailing" constant="-20" id="sVY-cS-3hp"/>
                             <constraint firstItem="VT4-2k-D1u" firstAttribute="top" secondItem="Tqm-ci-jFv" secondAttribute="bottom" id="von-rw-PBH"/>
@@ -810,6 +794,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didPressSignUpWithSender:" destination="LYi-7D-kj2" eventType="touchUpInside" id="taV-Gr-mI2"/>
+                                    <segue destination="10b-g6-M0D" kind="show" identifier="dashboard" id="2IG-JI-Qko"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -840,12 +825,11 @@
                         <outlet property="passwordTextField" destination="w24-15-b1V" id="Aif-Jb-OPe"/>
                         <outlet property="travelerRadioButton" destination="Fzp-A9-Gi2" id="Y0K-rK-9Pa"/>
                         <outlet property="usernameTextField" destination="WH4-w6-Syo" id="heD-nH-tL3"/>
-                        <segue destination="10b-g6-M0D" kind="show" identifier="dashboard" id="gTQ-S4-zYY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mN7-rU-qjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-119" y="932"/>
+            <point key="canvasLocation" x="-119.2" y="880.20989505247383"/>
         </scene>
         <!--Traveler Dashboard View Controller-->
         <scene sceneID="6K2-GR-ZBd">
@@ -918,6 +902,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BWS-nu-tjb"/>
+        <segue reference="pjv-gA-IBg"/>
     </inferredMetricsTieBreakers>
 </document>

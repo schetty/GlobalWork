@@ -66,30 +66,30 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-
+        imagePicker.delegate = self
         
         present(imagePicker, animated: true, completion: nil)
 
     }
     
     @IBAction func didPressSaveChanges(_ sender: UIButton) {
-//        
-//        var userProfile = Profile(isHost: true, countriesVisiting: "", userDescription: descriptionTextView.text?, languagesSpoken: languagesTextField.text?, userFeedbacks: "", datesHelpNeeded: <#T##NSDateInterval#>, location: <#T##NSLocale#>)
-//        userProfile.displayName = displayNameTextField.text?
-//        let dobStr = dateOfBirthTextField.text!
-//        let loc = locationTextField.text!
-//        let tagline = tagLineTextField.text?
-//        
-//        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        let dob = dateFormatter.date(from: dobStr)
-//        
-//        var data: NSData = NSData()
-//        
-//        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
-//        
-//        
+        
+  
+        
+        let dobStr = dateOfBirthTextField.text!
+        let loc = locationTextField.text!
+        let tagline = tagLineTextField.text?
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dob = dateFormatter.date(from: dobStr)
+        
+        var data: NSData = NSData()
+        
+        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
+   
+        var userProfile = Profile(isHost: true, displayName: displayNameTextField.text?, countriesVisiting: "none", userDescription: descriptionTextView.text?, languagesSpoken: languagesTextField.text?, userFeedbacks: "", datesHelpNeeded: <#T##NSDateInterval#>, location: <#T##String#>)
         
         let profile = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profileInfo")
 
@@ -129,7 +129,10 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     //MARK: - Delegate Methods for Image Picking
         ////// NOT WORKING COME BACK TO THIS
-    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    //private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+    
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         profilePhotoImageView.contentMode = .scaleAspectFit
         profilePhotoImageView.image = chosenImage
