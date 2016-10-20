@@ -12,6 +12,7 @@ struct Profile {
     
     
     let isHost:Bool
+    var displayName:String = String()
     var countriesVisiting:[String]
     var userDescription:String = String()
     var languagesSpoken:[String]
@@ -20,7 +21,7 @@ struct Profile {
     let profilePhotoURL:String = ""
     let age:int_fast64_t = int_fast64_t()
     var datesHelpNeeded:NSDateInterval
-    let location:NSLocale
+    let location:String
     let hostSitePhotoURL:String = String()
     
     

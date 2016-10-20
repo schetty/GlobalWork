@@ -27,6 +27,7 @@ class SSRadioButtonsController : NSObject
         Set whether a selected radio button can be deselected or not. Default value is false.
     */
     var shouldLetDeSelect = false
+    var shouldBeAbleToSelectMoreThanOne = false
     /**
         Variadic parameter init that accepts UIButtons.
 
@@ -87,8 +88,10 @@ class SSRadioButtonsController : NSObject
                 currentSelectedButton = nil
             }
         } else {
+            if (shouldBeAbleToSelectMoreThanOne == false) {
             for aButton in buttonsArray {
                 aButton.isSelected = false
+                }
             }
             sender.isSelected = true
             currentSelectedButton = sender

@@ -14,7 +14,6 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
-    let navBar = UINavigationController()
     
     @IBOutlet var usernameTextField: UITextField!
     

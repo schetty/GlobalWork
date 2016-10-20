@@ -82,6 +82,7 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
         
         radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = true
+        radioButtonController!.shouldBeAbleToSelectMoreThanOne = false
         
         
         //MARK : DO THIS LATER set a logout button alpha to 1 if already logged in

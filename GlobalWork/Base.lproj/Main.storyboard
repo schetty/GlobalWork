@@ -60,7 +60,7 @@
                     <connections>
                         <outlet property="passwordTextField" destination="79b-nv-RV0" id="aLe-1a-HPZ"/>
                         <outlet property="usernameTextField" destination="kF3-Fq-4fQ" id="Qbj-zE-6ed"/>
-                        <segue destination="10b-g6-M0D" kind="show" identifier="showDashboard" id="pjv-gA-IBg"/>
+                        <segue destination="10b-g6-M0D" kind="show" identifier="showDashboard" id="BWS-nu-tjb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -79,14 +79,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="DpG-qi-LeJ">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DpG-qi-LeJ">
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter a display name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="QgG-ys-i3m">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter a display name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="QgG-ys-i3m">
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DOB: (mm/dd/yyyy)" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6EW-qm-T32">
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -118,7 +120,7 @@
                                 <color key="textColor" red="0.51372549020000002" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TTk-ff-y6s">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="TTk-ff-y6s">
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter a tagline about yourself" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="g5A-dV-5Rb">
                                         <nil key="textColor"/>
@@ -132,32 +134,344 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36v-8L-zKt">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tqm-ci-jFv">
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-XK-Bet">
-                                        <color key="backgroundColor" red="0.86274509799999999" green="0.97254901959999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="HCs-PN-1Gd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="describe yourself in a few sentences:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASV-SK-CXs">
-                                        <frame key="frameInset" minX="8" minY="-8" width="195" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pri-GM-Rlv">
+                                        <frame key="frameInset" minY="13" width="19" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4BP-bW-5el" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="21" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.019607843137254902" green="0.40000000000000002" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" ambiguous="YES" text="Feb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7R7-a9-uyp">
+                                        <frame key="frameInset" minX="53" minY="13" width="20" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYB-Av-lGm" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="75" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.019607843137254902" green="0.40000000000000002" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Mar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNZ-Bb-uSj">
+                                        <frame key="frameInset" minX="107" minY="13" width="21" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9q-lf-9dR" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="129" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.019607843137254902" green="0.40000000000000002" blue="0.55294117647058827" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Apr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUe-f9-5WV">
+                                        <frame key="frameInset" minX="161" minY="13" width="19" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vec-eH-rND" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="181" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0078431372550000003" green="0.76470588240000004" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="May" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh2-A9-lW0">
+                                        <frame key="frameInset" minX="213" minY="13" width="22" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-V4-45c" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="237" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0078431372550000003" green="0.76470588240000004" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Jun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8E-5N-P56">
+                                        <frame key="frameInset" minX="268" minY="13" width="19" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ioo-z9-Nuz" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="289" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" red="1" green="0.62352941179999999" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0078431372550000003" green="0.76470588240000004" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="VT4-2k-D1u">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Jul" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qu7-gJ-Xhp">
+                                        <frame key="frameInset" width="16" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76o-Rb-drh" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="18" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0" green="0.6588235294117647" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" ambiguous="YES" text="Aug" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxc-6v-Gv8">
+                                        <frame key="frameInset" minX="50" width="21" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niR-U3-rFG" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="72" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0" green="0.6588235294117647" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sep" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWt-Dp-xNN">
+                                        <frame key="frameInset" minX="104" width="21" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="758" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ8-0W-1YB" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="127" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0" green="0.6588235294117647" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Oct" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-Wj-hGB">
+                                        <frame key="frameInset" minX="158" width="19" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKS-Xw-rbq" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="179" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0078431372549019607" green="0.50196078431372548" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAp-T2-jJI">
+                                        <frame key="frameInset" minX="211" width="21" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqt-JK-t4y" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="234" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0078431372549019607" green="0.50196078431372548" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Dec" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6d-64-eF1">
+                                        <frame key="frameInset" minX="266" width="21" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFZ-yd-y84" customClass="SSRadioButton" customModule="GlobalWork" customModuleProvider="target">
+                                        <frame key="frameInset" minX="289" width="30" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.0078431372549019607" green="0.50196078431372548" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tMr-XU-aPF">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36v-8L-zKt">
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-XK-Bet">
+                                                <color key="backgroundColor" red="0.86274509799999999" green="0.97254901959999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASV-SK-CXs">
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Yu7-XK-Bet" secondAttribute="trailing" constant="1" id="CKh-a0-vNH"/>
+                                            <constraint firstItem="Yu7-XK-Bet" firstAttribute="leading" secondItem="36v-8L-zKt" secondAttribute="leading" constant="1" id="Sf7-GS-40a"/>
+                                            <constraint firstItem="Yu7-XK-Bet" firstAttribute="top" secondItem="36v-8L-zKt" secondAttribute="top" constant="1" id="aax-W0-dRS"/>
+                                            <constraint firstItem="ASV-SK-CXs" firstAttribute="leading" secondItem="36v-8L-zKt" secondAttribute="leading" id="ol9-4s-E3r"/>
+                                            <constraint firstAttribute="bottom" secondItem="Yu7-XK-Bet" secondAttribute="bottom" constant="1" id="qxk-ou-vJd"/>
+                                            <constraint firstItem="ASV-SK-CXs" firstAttribute="top" secondItem="36v-8L-zKt" secondAttribute="top" id="xnZ-0x-GBI"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstItem="Yu7-XK-Bet" firstAttribute="leading" secondItem="36v-8L-zKt" secondAttribute="leading" id="EDh-gd-3Fw"/>
-                                    <constraint firstItem="Yu7-XK-Bet" firstAttribute="top" secondItem="36v-8L-zKt" secondAttribute="top" id="Nbz-yd-fCu"/>
-                                    <constraint firstAttribute="trailing" secondItem="Yu7-XK-Bet" secondAttribute="trailing" id="W8c-ie-av4"/>
-                                    <constraint firstAttribute="bottom" secondItem="Yu7-XK-Bet" secondAttribute="bottom" id="cZA-lP-udX"/>
+                                    <constraint firstAttribute="height" constant="60" id="q9E-Zy-xqM"/>
                                 </constraints>
-                            </view>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCV-GS-6NI">
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.41960784309999999" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
@@ -169,53 +483,69 @@
                                     <action selector="didPressSaveChanges:" destination="dI7-ch-eXL" eventType="touchUpInside" id="A7o-9v-mNe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzk-ez-FOl">
-                                <state key="normal" title="upload a new photo">
-                                    <color key="titleColor" red="0.97254901959999995" green="0.41960784309999999" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didPressUploadPhoto:" destination="dI7-ch-eXL" eventType="touchUpInside" id="ovb-s2-99K"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I need help in months of:" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkt-9u-Enf">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qzk-ez-FOl" firstAttribute="centerX" secondItem="SWe-Ys-13h" secondAttribute="centerX" id="01M-NU-tDO"/>
-                            <constraint firstItem="Qzk-ez-FOl" firstAttribute="top" secondItem="Yu7-XK-Bet" secondAttribute="bottom" constant="52" id="1n9-Pn-8yg"/>
+                            <constraint firstItem="tMr-XU-aPF" firstAttribute="top" secondItem="VT4-2k-D1u" secondAttribute="bottom" constant="16" id="4g6-8k-HYh"/>
+                            <constraint firstItem="Tqm-ci-jFv" firstAttribute="top" secondItem="Jkt-9u-Enf" secondAttribute="bottom" constant="6" id="78G-VN-I4j"/>
                             <constraint firstItem="wwJ-U5-2iz" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="5" id="ECG-YD-2YJ"/>
+                            <constraint firstItem="tMr-XU-aPF" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="15" id="F7W-YU-xT1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VT4-2k-D1u" secondAttribute="trailing" constant="12" id="G0X-29-GOf"/>
                             <constraint firstItem="TTk-ff-y6s" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="35" id="G9z-8U-ytY"/>
-                            <constraint firstItem="TTk-ff-y6s" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="170" id="Hfa-Sc-S6P"/>
+                            <constraint firstItem="TTk-ff-y6s" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="153" id="Hfa-Sc-S6P"/>
                             <constraint firstItem="bqO-22-ylB" firstAttribute="top" secondItem="W2g-BI-lwi" secondAttribute="bottom" id="J2e-zd-SrF"/>
                             <constraint firstItem="W2g-BI-lwi" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="44" id="LTA-6H-nWl"/>
+                            <constraint firstItem="Tqm-ci-jFv" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="12" id="Nxs-oz-EV9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tMr-XU-aPF" secondAttribute="trailing" constant="15" id="PlE-1i-NIa"/>
                             <constraint firstItem="DpG-qi-LeJ" firstAttribute="top" secondItem="ftu-wN-XtA" secondAttribute="bottom" constant="8" id="Sau-fr-XvL"/>
-                            <constraint firstItem="36v-8L-zKt" firstAttribute="top" secondItem="TTk-ff-y6s" secondAttribute="bottom" constant="26" id="TAw-zt-UrT"/>
                             <constraint firstItem="DCV-GS-6NI" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="-20" id="U6b-iP-dM1"/>
+                            <constraint firstItem="Tqm-ci-jFv" firstAttribute="top" secondItem="TTk-ff-y6s" secondAttribute="bottom" constant="35" id="Ug0-44-uyp"/>
                             <constraint firstItem="DpG-qi-LeJ" firstAttribute="leading" secondItem="W2g-BI-lwi" secondAttribute="trailing" constant="60" id="UzM-Cx-MrQ"/>
                             <constraint firstItem="bqO-22-ylB" firstAttribute="top" secondItem="wwJ-U5-2iz" secondAttribute="bottom" id="W1B-kK-1Zj"/>
-                            <constraint firstItem="36v-8L-zKt" firstAttribute="centerX" secondItem="SWe-Ys-13h" secondAttribute="centerX" id="YAs-Ia-tp7"/>
+                            <constraint firstItem="VT4-2k-D1u" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="12" id="YQ6-dv-iZO"/>
                             <constraint firstItem="wwJ-U5-2iz" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="5" id="bCn-l0-vxf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="TTk-ff-y6s" secondAttribute="trailing" constant="20" id="eae-c7-8By"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TTk-ff-y6s" secondAttribute="trailing" constant="15" id="eae-c7-8By"/>
                             <constraint firstItem="XQc-Io-RFJ" firstAttribute="top" secondItem="DCV-GS-6NI" secondAttribute="bottom" id="ekX-e8-saR"/>
-                            <constraint firstItem="36v-8L-zKt" firstAttribute="width" secondItem="TTk-ff-y6s" secondAttribute="width" id="i9L-Yl-Eyv"/>
+                            <constraint firstItem="Jkt-9u-Enf" firstAttribute="leading" secondItem="SWe-Ys-13h" secondAttribute="leadingMargin" constant="12" id="koK-AT-Mrw"/>
                             <constraint firstItem="bqO-22-ylB" firstAttribute="centerX" secondItem="wwJ-U5-2iz" secondAttribute="centerX" id="nhe-eb-94G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DpG-qi-LeJ" secondAttribute="trailing" constant="20" id="oSK-5V-SE2"/>
                             <constraint firstItem="DpG-qi-LeJ" firstAttribute="leading" secondItem="wwJ-U5-2iz" secondAttribute="trailing" constant="20" id="pIs-tX-TU8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tqm-ci-jFv" secondAttribute="trailing" constant="12" id="sR0-8m-mzm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DCV-GS-6NI" secondAttribute="trailing" constant="-20" id="sVY-cS-3hp"/>
+                            <constraint firstItem="VT4-2k-D1u" firstAttribute="top" secondItem="Tqm-ci-jFv" secondAttribute="bottom" id="von-rw-PBH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="april" destination="vec-eH-rND" id="MIC-dO-6MI"/>
+                        <outlet property="august" destination="niR-U3-rFG" id="dZa-Bo-754"/>
                         <outlet property="dateOfBirthTextField" destination="6EW-qm-T32" id="6Nj-gy-vme"/>
+                        <outlet property="december" destination="cFZ-yd-y84" id="yec-qx-ySa"/>
                         <outlet property="descriptionTextView" destination="Yu7-XK-Bet" id="rNb-WA-kHq"/>
                         <outlet property="displayNameTextField" destination="QgG-ys-i3m" id="kox-He-Bdj"/>
+                        <outlet property="february" destination="vYB-Av-lGm" id="3zN-sI-kda"/>
+                        <outlet property="janurary" destination="4BP-bW-5el" id="OWo-mg-B69"/>
+                        <outlet property="july" destination="76o-Rb-drh" id="nTs-5Z-JjW"/>
+                        <outlet property="june" destination="Ioo-z9-Nuz" id="UPI-AR-0xb"/>
                         <outlet property="languagesTextField" destination="HEy-FW-C0V" id="QiS-N9-6qO"/>
                         <outlet property="locationTextField" destination="du2-EZ-Akv" id="xb7-Zu-DR1"/>
+                        <outlet property="march" destination="Z9q-lf-9dR" id="2Zp-Zl-VaV"/>
+                        <outlet property="may" destination="GHe-V4-45c" id="YFA-qe-gMp"/>
+                        <outlet property="november" destination="vqt-JK-t4y" id="w6w-Z4-S9i"/>
+                        <outlet property="october" destination="nKS-Xw-rbq" id="6w9-z1-NNF"/>
                         <outlet property="profilePhotoImageView" destination="wwJ-U5-2iz" id="iXC-Tf-4GQ"/>
+                        <outlet property="september" destination="OQ8-0W-1YB" id="yAr-4c-Iyx"/>
                         <outlet property="tagLineTextField" destination="g5A-dV-5Rb" id="4wo-p2-Ts4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGQ-MU-sI1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2290" y="-965"/>
+            <point key="canvasLocation" x="2288.8000000000002" y="-965.6671664167917"/>
         </scene>
         <!--Host Dashboard View Controller-->
         <scene sceneID="YmK-BA-Umn">
@@ -480,7 +810,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didPressSignUpWithSender:" destination="LYi-7D-kj2" eventType="touchUpInside" id="taV-Gr-mI2"/>
-                                    <segue destination="10b-g6-M0D" kind="show" identifier="dashboard" id="2IG-JI-Qko"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -511,11 +840,12 @@
                         <outlet property="passwordTextField" destination="w24-15-b1V" id="Aif-Jb-OPe"/>
                         <outlet property="travelerRadioButton" destination="Fzp-A9-Gi2" id="Y0K-rK-9Pa"/>
                         <outlet property="usernameTextField" destination="WH4-w6-Syo" id="heD-nH-tL3"/>
+                        <segue destination="10b-g6-M0D" kind="show" identifier="dashboard" id="gTQ-S4-zYY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mN7-rU-qjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-119.2" y="880.20989505247383"/>
+            <point key="canvasLocation" x="-119" y="932"/>
         </scene>
         <!--Traveler Dashboard View Controller-->
         <scene sceneID="6K2-GR-ZBd">
@@ -588,6 +918,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="pjv-gA-IBg"/>
+        <segue reference="BWS-nu-tjb"/>
     </inferredMetricsTieBreakers>
 </document>
