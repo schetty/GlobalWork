@@ -11,18 +11,18 @@ import UIKit
 struct Profile {
     
     
-    let isHost:Bool
-    var displayName:String = String()
+    let isHost:Bool?
+    var displayName: String?
     var countriesVisiting:[String]
-    var userDescription:String = String()
-    var languagesSpoken:[String]
-    let tagline:String = String()
+//    var userDescription:String?
+    var languagesSpoken:String?
+    let tagline:String?
+    let dateOfBirth:String!
     var userFeedbacks:[String]
     let profilePhotoURL:String = ""
-    let age:int_fast64_t = int_fast64_t()
     var datesHelpNeeded:Array<String>
-    let location:String
-    let hostSitePhotoURL:String = String()
+    let location: String?
+//    let hostSitePhotoURL:String?
     
     
     

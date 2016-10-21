@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
     
     @IBAction func didPressSignUp(sender: UIButton) {
         
-        if self.emailTextField.text == "" || self.passwordTextField.text == "" {
+        if (self.emailTextField.text == "" || self.passwordTextField.text == "") {
             
             let alert = UIAlertController(title: "Oops!",
                                           message: "You left something blank",

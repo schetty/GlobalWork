@@ -35,15 +35,23 @@ class LoginViewController: UIViewController {
             
         else {
             
-            FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-                if user != nil {
-                    print(Thread.isMainThread)
-            self.performSegue(withIdentifier: "showDashboard", sender: self)
-                    
-                    print("LOGGED IN YAY!")
+            FIRAuth.auth()?.signIn(withEmail: self.usernameTextField.text!, password: self.passwordTextField.text!) { (user, error) in
                 
-                } else {
-                    // No user is signed in.
+                FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+                    if user != nil {
+                        print(Thread.isMainThread)
+                        
+                        self.performSegue(withIdentifier: "showDashboard", sender: self)
+                        
+                        print("LOGGED IN YAY!")
+                        
+                    }
+                    
+                    if (error != nil) {
+                        
+                        print(error)
+                        
+                    } 
                 }
             }
         }

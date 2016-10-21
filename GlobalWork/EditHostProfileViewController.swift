@@ -14,21 +14,21 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     // MARK: Firebase Ref
     var ref: FIRDatabaseReference!
-
+    
     
     
     // MARK: StoryBoard Outlet Properties
-        //images
+    //images
     @IBOutlet weak var profilePhotoImageView: UIImageView!
     
-        // MARK: Image Picker Controller
+    // MARK: Image Picker Controller
     let imagePicker = UIImagePickerController()
     var currentProfileImage = UIImage()
-        // end
+    // end
     
     //buttons - RADIO BUTTONS
     var radioButtonController: SSRadioButtonsController?
-
+    
     @IBOutlet var janurary: SSRadioButton!
     @IBOutlet var february: SSRadioButton!
     @IBOutlet var march: SSRadioButton!
@@ -46,7 +46,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     /// public method below
     
     
-        //text fields
+    //text fields
     
     @IBOutlet var displayNameTextField: UITextField!
     @IBOutlet var dateOfBirthTextField: UITextField!
@@ -55,13 +55,13 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     @IBOutlet var tagLineTextField: UITextField!
     @IBOutlet var languagesTextField: UITextField!
     
-        //text view
+    //text view
     
-    @IBOutlet var descriptionTextView: UITextView!
+//    @IBOutlet var descriptionTextView: UITextView!
     
-        // collection view
+    // collection view
     
-//    @IBOutlet var collectionViewHostPhotos: UICollectionView!
+    //    @IBOutlet var collectionViewHostPhotos: UICollectionView!
     
     
     // MARK: StoryBoard Action Functions
@@ -74,47 +74,103 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         imagePicker.delegate = self
         
         present(imagePicker, animated: true, completion: nil)
-
+        
     }
     
     
     @IBAction func didPressSaveChanges(_ sender: UIButton) {
         
-        let currentButton = self.radioButtonController?.selectedButton()
-        
-        
-        self.setDatesHelpNeeded(aButton: currentButton)
-        print(self.monthsNeeded)
-        
-//        let dobStr = dateOfBirthTextField.text!
-//        let loc = locationTextField.text!
-////        let tagline = tagLineTextField.text?
-//        
-//        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        let dob = dateFormatter.date(from: dobStr)
-//        
-//        var data: NSData = NSData()
-        
-//        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
-   
-/*        var userProfile = Profile(isHost: true, displayName: displayNameTextField.text?, countriesVisiting: "none", userDescription: descriptionTextView.text?, languagesSpoken: languagesTextField.text?, userFeedbacks: "", datesHelpNeeded: , location: String) */
-        
-//        let profile = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profileInfo")
-
-
-        
+        if (self.dateOfBirthTextField.text == "" || self.locationTextField.text == "") {
+            
+            let alert = UIAlertController(title: "Oops!",
+                                          message: "You left your D.O.B or location field blank. We need that info",
+                                          preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(defaultAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
+            
+        else {
+            
+            let currentButton = self.radioButtonController?.selectedButton()
+            
+            
+            self.setDatesHelpNeeded(aButton: currentButton)
+            print(self.monthsNeeded)
+            
+            let dobStr = dateOfBirthTextField.text!
+            let loc = locationTextField.text!
+            let enteredTag = tagLineTextField.text!
+            let monthsHelpNeeded = Array(self.monthsNeeded)
+            
+            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd-MM-yyyy"
+//            let dob = dateFormatter.date(from: dobStr)
+            
+            
+            
+            //        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
+            
+            let userProfile = Profile(isHost: true, displayName: displayNameTextField.text,  countriesVisiting: ["none"], languagesSpoken: languagesTextField.text, tagline: enteredTag, dateOfBirth: dobStr, userFeedbacks: [""], datesHelpNeeded: monthsHelpNeeded, location: loc)
+            
+            let setDisplayName = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/displayName")
+            
+            let setDOB = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/DOB")
+            
+            let setLangsSpoken = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/langsSpoken")
+            
+//            let setDesciption = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/userDescription")
+            
+            let setTagline = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/tagline")
+            
+            let setMonthsHelpNeeded = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/monthsHelpNeeded")
+            
+            let setUserLocation = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/userLocation")
+            
+            if (userProfile.displayName != nil) {
+                setDisplayName.setValue(userProfile.displayName)
+            }
+            
+            if (userProfile.languagesSpoken != nil) {
+                setLangsSpoken.setValue(userProfile.languagesSpoken)
+            }
+            
+//            if (userProfile.userDescription != nil) {
+//                setDesciption.setValue(userProfile.userDescription)
+//            }
+            
+            if (userProfile.tagline != nil) {
+                setTagline.setValue(userProfile.tagline)
+            }
+            
+            if (userProfile.location != nil) {
+                setUserLocation.setValue(userProfile.location)
+            }
+            
+            if (userProfile.dateOfBirth != nil) {
+                setDOB.setValue(userProfile.dateOfBirth)
+            }
+                
+            if (userProfile.datesHelpNeeded != nil) {
+                setMonthsHelpNeeded.setValue(userProfile.datesHelpNeeded)
+            }
+            
+            else {
+                print ("filled out nada")
+            }
+        }
     }
     
     @IBAction func didPressUploadPhoto(_ sender: UIButton) {
         
     }
-
     
     
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,17 +179,17 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = true
         radioButtonController!.shouldBeAbleToSelectMoreThanOne = true
-
+        
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-//        collectionViewHostPhotos.delegate = self
+        //        collectionViewHostPhotos.delegate = self
         
         
         ref = FIRDatabase.database().reference()
-
-
+        
+        
     }
-
+    
     
     
     
@@ -142,7 +198,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-    
+        
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         profilePhotoImageView.contentMode = .scaleAspectFit
         profilePhotoImageView.image = chosenImage
@@ -150,7 +206,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         print("PICKED")
         
         dismiss(animated: true, completion: nil)
-
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -179,7 +235,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         if (may.isSelected) {
             self.monthsNeeded.insert("May")
         }
-
+        
         if (june.isSelected) {
             self.monthsNeeded.insert("June")
         }
@@ -191,7 +247,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         if (august.isSelected) {
             self.monthsNeeded.insert("August")
         }
-
+        
         if (september.isSelected) {
             self.monthsNeeded.insert("September")
         }
@@ -208,8 +264,8 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         }
         else if (aButton == nil) {
             self.monthsNeeded.insert("Your months are empty")
+        }
     }
-}
     
     
     
