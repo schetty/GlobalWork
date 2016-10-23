@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegate,*/ UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSRadioButtonControllerDelegate {
+class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegate,*/ UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSRadioButtonControllerDelegate, UITextViewDelegate {
     
     
     // MARK: Firebase Ref
@@ -57,7 +57,9 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     //text view
     
-//    @IBOutlet var descriptionTextView: UITextView!
+    @IBOutlet var descriptionTextView: UITextView!
+    var placeholderLabel : UILabel!
+
     
     // collection view
     
@@ -76,6 +78,9 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         present(imagePicker, animated: true, completion: nil)
         
     }
+    
+    
+    @IBOutlet var saveChangesButton: UIButton!
     
     
     @IBAction func didPressSaveChanges(_ sender: UIButton) {
@@ -105,15 +110,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
             let monthsHelpNeeded = Array(self.monthsNeeded)
             
             
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "dd-MM-yyyy"
-//            let dob = dateFormatter.date(from: dobStr)
-            
-            
-            
-            //        let base64String = data.base64EncodedStringWithOptions(NSData.Base64EncodingOptions.Encoding64CharacterLineLength)
-            
-            let userProfile = Profile(isHost: true, displayName: displayNameTextField.text,  countriesVisiting: ["none"], languagesSpoken: languagesTextField.text, tagline: enteredTag, dateOfBirth: dobStr, userFeedbacks: [""], datesHelpNeeded: monthsHelpNeeded, location: loc)
+            let userProfile = Profile(isHost: true, displayName: displayNameTextField.text!,  countriesVisiting: ["none"], userDescription: descriptionTextView.text, languagesSpoken: languagesTextField.text!, tagline: enteredTag, dateOfBirth: dobStr, /*userFeedbacks: [""],*/ profilePhotoURL: "URL", datesHelpNeeded: monthsHelpNeeded, location: loc)
             
             let setDisplayName = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/displayName")
             
@@ -121,7 +118,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
             
             let setLangsSpoken = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/langsSpoken")
             
-//            let setDesciption = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/userDescription")
+            let setDesciption = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/userDescription")
             
             let setTagline = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/tagline")
             
@@ -137,9 +134,9 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
                 setLangsSpoken.setValue(userProfile.languagesSpoken)
             }
             
-//            if (userProfile.userDescription != nil) {
-//                setDesciption.setValue(userProfile.userDescription)
-//            }
+            if (userProfile.userDescription != nil) {
+                setDesciption.setValue(userProfile.userDescription)
+            }
             
             if (userProfile.tagline != nil) {
                 setTagline.setValue(userProfile.tagline)
@@ -153,14 +150,15 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
                 setDOB.setValue(userProfile.dateOfBirth)
             }
                 
-            if (userProfile.datesHelpNeeded != nil) {
-                setMonthsHelpNeeded.setValue(userProfile.datesHelpNeeded)
-            }
-            
             else {
                 print ("filled out nada")
             }
+            
+            setMonthsHelpNeeded.setValue(userProfile.datesHelpNeeded)
+            
         }
+        
+        
     }
     
     @IBAction func didPressUploadPhoto(_ sender: UIButton) {
@@ -170,7 +168,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     
     
-    
+    let placeholderText = "enter a description about yourself & your opportunity for travelers"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -180,10 +178,24 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         radioButtonController!.shouldLetDeSelect = true
         radioButtonController!.shouldBeAbleToSelectMoreThanOne = true
         
+        
+        descriptionTextView.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        placeholderLabel.numberOfLines = 0
+        placeholderLabel.text = "enter a description about yourself & your opportunity for travelers"
+        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (descriptionTextView.font?.pointSize)! / 1.31)
+        placeholderLabel.sizeToFit()
+        //descriptionTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 0, y: (descriptionTextView.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderLabel.isHidden = !descriptionTextView.text.isEmpty
+        
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         //        collectionViewHostPhotos.delegate = self
-        
+        descriptionTextView.text = placeholderText
+        descriptionTextView.textColor = UIColor(white: 0, alpha: 0.3)
         
         ref = FIRDatabase.database().reference()
         
@@ -191,8 +203,30 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     }
     
     
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !descriptionTextView.text.isEmpty
+    }
+
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if (descriptionTextView.text == placeholderText) {
+            descriptionTextView.text = ""
+            descriptionTextView.textColor = UIColor.black
+        }
+        return true
+    }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (descriptionTextView.text == "") {
+            descriptionTextView.text = placeholderText
+            descriptionTextView.textColor = UIColor(white: 0, alpha: 0.3)
+        }
+    }
     
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+        if !descriptionTextView.frame.contains(sender.location(in: view)) {
+            descriptionTextView.resignFirstResponder()
+        }
+    }
     
     //MARK: - Delegate Methods for Image Picking
     
