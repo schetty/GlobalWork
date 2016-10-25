@@ -11,6 +11,10 @@ import Firebase
 
 class PublicHostProfileViewController: UIViewController {
     
+    var profile: Profile?
+    var arrayMonthsHelpNeeded:[String]?
+    private var monthsNeedHelp:[String]?
+    
     // MARK: - OUTLETS & PROPERTIES for UI
     
     @IBOutlet var profileImageView: UIImageView!
@@ -21,7 +25,7 @@ class PublicHostProfileViewController: UIViewController {
     @IBOutlet var languagesLabel: UILabel!
     @IBOutlet var monthsHelpNeededLabel: UILabel!
     
-        // MARK - MONTH BUTTONS
+    // MARK - MONTH BUTTONS
     @IBOutlet var januraryButton: SSRadioButton!
     @IBOutlet var februaryButton: SSRadioButton!
     @IBOutlet var marchButton: SSRadioButton!
@@ -38,26 +42,88 @@ class PublicHostProfileViewController: UIViewController {
     @IBOutlet var descriptionTextView: UITextView!
     
     var ref: FIRDatabaseReference!
-
-
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+ 
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkIfUserIsLoggedIn()
+        loadUserDataFromDatabase()
+        
+        
+    }
+    
+    
+    func checkIfUserIsLoggedIn () {
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        
+        if (uid == nil) {
+            print("not logged in")
+            return
+        }
+        
+        FIRDatabase.database().reference().child("data/users/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
+            
+            if let snapDict = Snapshot.value as? [String : AnyObject] {
+                    print(snapDict)
+                self.monthsNeedHelp = snapDict["monthsHelpNeeded"] as! [String]?
+                }
+            })
+            
+        }
+    
+    
+    
+   private func loadUserDataFromDatabase() {
+        if let profileImageURL = profile?.profilePhotoURL {
+            let url = NSURL(string: profileImageURL)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print(error)
+                    return
+                }
+                
+                DispatchQueue.main.async{
+                    
+                    self.profileImageView.image = UIImage(data: data!)
 
-//        ref = FIRDatabase.database().reference(withPath: "users")
-//        ref.observe(.value, with: { snapshot in
+                    }
+                
+                
+            }).resume()
+    }
+    
+    }
+    
+    
+    private func fillInMonthsNeedHelp() {
+        let monthButtons = [januraryButton,
+                            februaryButton,
+                            marchButton,
+                            aprilButton,
+                            mayButton,
+                            juneButton,
+                            julyButton,
+                            augustButton,
+                            septemberButton,
+                            octoberButton,
+                            novemberButton,
+                            decemberButton,
+                            ]
+//        if self.arrayMonthsHelpNeeded != nil {
+////            for month in monthsNeedHelp?.count {
+////                
+////            }
 //            
-//            var newUserInfo: [Info] = []
 //            
-//            for info in snapshot.children {
-//                let infoPiece = Info(snapshot: item as! FIRDataSnapshot)
-//                newItems.append(planesItem)
-//            }
-//
-//            print(snapshot.value)
-//        })
-//    }
-
-
-}
-
+//            
+//        }
+        
+    }
 }

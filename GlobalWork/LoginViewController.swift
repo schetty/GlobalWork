@@ -15,6 +15,7 @@ import Firebase
 class LoginViewController: UIViewController {
     
     
+    
     @IBOutlet var usernameTextField: UITextField!
     
     @IBOutlet var passwordTextField: UITextField!
@@ -39,23 +40,40 @@ class LoginViewController: UIViewController {
                 
                 FIRAuth.auth()?.addStateDidChangeListener { auth, user in
                     if user != nil {
-                        print(Thread.isMainThread)
+                        let userUID = user!.uid
+                        FIRDatabase.database().reference().child("data/users/").child(userUID).child("isHost").observeSingleEvent(of: .value, with : { (Snapshot) in
+                            
+                            print(Snapshot)
+                            
+                            if let isAHost = Snapshot.value as? Bool {
+                                if isAHost == true {
+                                    self.performSegue(withIdentifier: "showHostDashboard", sender: self)
+                                }
+                                    
+                                else {
+                                    self.performSegue(withIdentifier: "showTravelerDashboard", sender: self)
+                                    
+                                }
+                            }
+                            print("LOGGED IN YAY!")
+                            
+                            
+                        })
                         
-                        self.performSegue(withIdentifier: "showDashboard", sender: self)
-                        
-                        print("LOGGED IN YAY!")
-                        
+                        if (error != nil) {
+                            
+                            print(error)
+                            
+                        }
                     }
-                    
-                    if (error != nil) {
-                        
-                        print(error)
-                        
-                    } 
                 }
             }
         }
+        
     }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

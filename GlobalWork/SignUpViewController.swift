@@ -69,7 +69,6 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
                 
             }
             
-            self.performSegue(withIdentifier: "dashboard", sender: self)
             
         }
         
@@ -100,10 +99,16 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
         
         if (aButton == travelerRadioButton) {
             isHostRef.setValue(false)
+            
+            self.performSegue(withIdentifier: "travelerDashboard", sender: self)
+
         }
         
         else if (aButton == hostRadioButton) {
             isHostRef.setValue(true)
+            
+            self.performSegue(withIdentifier: "hostDashboard", sender: self)
+
         }
             
         else {

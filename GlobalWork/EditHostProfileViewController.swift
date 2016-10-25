@@ -8,12 +8,15 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegate,*/ UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSRadioButtonControllerDelegate, UITextViewDelegate {
     
     
     // MARK: Firebase Ref
     var ref: FIRDatabaseReference!
+    var userProfile: Profile!
+//    var imageName:String!
     
     
     
@@ -42,7 +45,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     @IBOutlet var november: SSRadioButton!
     @IBOutlet var december: SSRadioButton!
     
-    var monthsNeeded = Set<String>()
+    var monthsNeeded = Array<String>()
     /// public method below
     
     
@@ -59,7 +62,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     @IBOutlet var descriptionTextView: UITextView!
     var placeholderLabel : UILabel!
-
+    
     
     // collection view
     
@@ -94,23 +97,33 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
             alert.addAction(defaultAction)
             
             present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let image = profilePhotoImageView.image else {
+            return
         }
             
-        else {
+        let currentButton = self.radioButtonController?.selectedButton()
+        
+        
+        self.setDatesHelpNeeded(aButton: currentButton)
+        print(self.monthsNeeded)
+        
+        let dobStr = dateOfBirthTextField.text!
+        let loc = locationTextField.text!
+        let enteredTag = tagLineTextField.text!
+        let monthsHelpNeeded = self.monthsNeeded
+        
+        upload(image: image)
+        { urlString in
+            guard let url = urlString else {
+                return
+            }
             
-            let currentButton = self.radioButtonController?.selectedButton()
+            self.userProfile = Profile(isHost: true, displayName: self.displayNameTextField.text!,  countriesVisiting: ["none"], userDescription: self.descriptionTextView.text, languagesSpoken: self.languagesTextField.text!, tagline: enteredTag, dateOfBirth: dobStr, /*userFeedbacks: [""],*/ profilePhotoURL: url, datesHelpNeeded: monthsHelpNeeded, location: loc)
             
-            
-            self.setDatesHelpNeeded(aButton: currentButton)
-            print(self.monthsNeeded)
-            
-            let dobStr = dateOfBirthTextField.text!
-            let loc = locationTextField.text!
-            let enteredTag = tagLineTextField.text!
-            let monthsHelpNeeded = Array(self.monthsNeeded)
-            
-            
-            let userProfile = Profile(isHost: true, displayName: displayNameTextField.text!,  countriesVisiting: ["none"], userDescription: descriptionTextView.text, languagesSpoken: languagesTextField.text!, tagline: enteredTag, dateOfBirth: dobStr, /*userFeedbacks: [""],*/ profilePhotoURL: "URL", datesHelpNeeded: monthsHelpNeeded, location: loc)
+        
             
             let setDisplayName = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/displayName")
             
@@ -126,39 +139,48 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
             
             let setUserLocation = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/userLocation")
             
-            if (userProfile.displayName != nil) {
-                setDisplayName.setValue(userProfile.displayName)
+            let setUserPhoto = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profileImageUrl")
+            
+            if (self.userProfile.displayName != nil) {
+                setDisplayName.setValue(self.userProfile.displayName)
             }
             
-            if (userProfile.languagesSpoken != nil) {
-                setLangsSpoken.setValue(userProfile.languagesSpoken)
+            if (self.userProfile.languagesSpoken != nil) {
+                setLangsSpoken.setValue(self.userProfile.languagesSpoken)
             }
             
-            if (userProfile.userDescription != nil) {
-                setDesciption.setValue(userProfile.userDescription)
+            if (self.userProfile.userDescription != nil) {
+                setDesciption.setValue(self.userProfile.userDescription)
             }
             
-            if (userProfile.tagline != nil) {
-                setTagline.setValue(userProfile.tagline)
+            if (self.userProfile.tagline != nil) {
+                setTagline.setValue(self.userProfile.tagline)
             }
             
-            if (userProfile.location != nil) {
-                setUserLocation.setValue(userProfile.location)
+            if (self.userProfile.location != nil) {
+                setUserLocation.setValue(self.userProfile.location)
             }
             
-            if (userProfile.dateOfBirth != nil) {
-                setDOB.setValue(userProfile.dateOfBirth)
+            if (self.userProfile.dateOfBirth != nil) {
+                setDOB.setValue(self.userProfile.dateOfBirth)
             }
+                
+            if (self.userProfile.profilePhotoURL != nil) {
+                setUserPhoto.setValue(self.userProfile.profilePhotoURL)
+            }
+            
+//            if (imageName != nil) {
+//                sendProfilePhotoToDatabaseWithUID(uid: (FIRAuth.auth()!.currentUser!.uid))
+//            }
                 
             else {
                 print ("filled out nada")
             }
             
-            setMonthsHelpNeeded.setValue(userProfile.datesHelpNeeded)
+            setMonthsHelpNeeded.setValue(self.userProfile.datesHelpNeeded)
             
+            self.registerUserIntoDatabaseWithUID(uid: FIRAuth.auth()!.currentUser!.uid, values: [String : AnyObject]())
         }
-        
-        
     }
     
     @IBAction func didPressUploadPhoto(_ sender: UIButton) {
@@ -186,7 +208,6 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         placeholderLabel.text = "enter a description about yourself & your opportunity for travelers"
         placeholderLabel.font = UIFont.italicSystemFont(ofSize: (descriptionTextView.font?.pointSize)! / 1.31)
         placeholderLabel.sizeToFit()
-        //descriptionTextView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 0, y: (descriptionTextView.font?.pointSize)! / 2)
         placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
         placeholderLabel.isHidden = !descriptionTextView.text.isEmpty
@@ -206,7 +227,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !descriptionTextView.text.isEmpty
     }
-
+    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if (descriptionTextView.text == placeholderText) {
             descriptionTextView.text = ""
@@ -236,8 +257,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         profilePhotoImageView.contentMode = .scaleAspectFit
         profilePhotoImageView.image = chosenImage
-        
-        print("PICKED")
+        profilePhotoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         dismiss(animated: true, completion: nil)
         
@@ -248,62 +268,103 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     }
     
     
+    private func registerUserIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
+        let ref = FIRDatabase.database().reference(fromURL: "https://globalwork-fe6cf.firebaseio.com")
+        let usersReference = ref.child("data/users").child(uid)
+        
+        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            
+            if err != nil {
+                print(err)
+                return
+            }
+        })
+    }
     
-    func setDatesHelpNeeded(aButton:UIButton?) {
-        if (janurary.isSelected) {
-            self.monthsNeeded.insert("Janurary")
+    private func upload(image: UIImage, completion: @escaping (String?)->()) {
+        if let uploadPic = UIImagePNGRepresentation(image) {
+            
+            let imageName = NSUUID().uuidString
+            let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).png")
+            
+            storageRef.put(uploadPic, metadata: nil) { (metadata, error) in
+                if error != nil {
+                    completion(nil)
+                    print(error)
+                    return
+                    
+                }
+                
+                if let profilePicURL =  metadata?.downloadURL()?.absoluteString {
+                    completion(profilePicURL)
+                    //self.sendProfilePhotoToDatabaseWithUID(uid: (FIRAuth.auth()!.currentUser!.uid))
+//                    self.userProfile.profilePhotoURL = profilePicURL
+//                    let values = ["profileImageUrl": profilePicURL]
+                    
+//                    self.registerUserIntoDatabaseWithUID(uid: uid, values: values as [String : AnyObject])
+                } else {
+                    completion(nil)
+                }
+            }
+            
         }
         
-        if (february.isSelected) {
-            self.monthsNeeded.insert("February")
-        }
-        
-        if (march.isSelected) {
-            self.monthsNeeded.insert("March")
-        }
-        
-        if (april.isSelected) {
-            self.monthsNeeded.insert("April")
-        }
-        
-        if (may.isSelected) {
-            self.monthsNeeded.insert("May")
-        }
-        
-        if (june.isSelected) {
-            self.monthsNeeded.insert("June")
-        }
-        
-        if (july.isSelected) {
-            self.monthsNeeded.insert("July")
-        }
-        
-        if (august.isSelected) {
-            self.monthsNeeded.insert("August")
-        }
-        
-        if (september.isSelected) {
-            self.monthsNeeded.insert("September")
-        }
-        
-        if (october.isSelected) {
-            self.monthsNeeded.insert("October")
-        }
-        
-        if (november.isSelected) {
-            self.monthsNeeded.insert("November")
-        }
-        if (december.isSelected) {
-            self.monthsNeeded.insert("December")
-        }
-        else if (aButton == nil) {
-            self.monthsNeeded.insert("Your months are empty")
-        }
     }
     
     
-    
-    
+    func setDatesHelpNeeded(aButton:UIButton?) {
+        self.monthsNeeded.removeAll()
+        
+        if (janurary.isSelected) {
+            self.monthsNeeded.append("Janurary")
+        }
+        
+        if (february.isSelected) {
+            self.monthsNeeded.append("February")
+        }
+        
+        if (march.isSelected) {
+            self.monthsNeeded.append("March")
+        }
+        
+        if (april.isSelected) {
+            self.monthsNeeded.append("April")
+        }
+        
+        if (may.isSelected) {
+            self.monthsNeeded.append("May")
+        }
+        
+        if (june.isSelected) {
+            self.monthsNeeded.append("June")
+        }
+        
+        if (july.isSelected) {
+            self.monthsNeeded.append("July")
+        }
+        
+        if (august.isSelected) {
+            self.monthsNeeded.append("August")
+        }
+        
+        if (september.isSelected) {
+            self.monthsNeeded.append("September")
+        }
+        
+        if (october.isSelected) {
+            self.monthsNeeded.append("October")
+        }
+        
+        if (november.isSelected) {
+            self.monthsNeeded.append("November")
+        }
+        if (december.isSelected) {
+            self.monthsNeeded.append("December")
+        }
+        else if (aButton == nil) {
+            self.monthsNeeded.append("Your months are empty")
+        }
+    }
     
     
     

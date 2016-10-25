@@ -33,6 +33,7 @@
 		3906E59E1DB6AD2D00107108 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E59D1DB6AD2D00107108 /* Stylesheet.swift */; };
 		3906E5A11DB6E2AA00107108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3906E59F1DB6E2AA00107108 /* Main.storyboard */; };
 		3906E5A41DB7F97600107108 /* HostSitePictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906E5A31DB7F97600107108 /* HostSitePictureCollectionViewCell.swift */; };
+		3933D8261DBEE5E800F424F4 /* Months.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3933D8251DBEE5E800F424F4 /* Months.swift */; };
 		FB4BE1F26A9F7C2CCBC697C2 /* Pods_GlobalWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB9FF0D369460D67246CE6B /* Pods_GlobalWork.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		3906E5A01DB6E2AA00107108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3906E5A21DB6F15800107108 /* GlobalWork.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GlobalWork.entitlements; sourceTree = "<group>"; };
 		3906E5A31DB7F97600107108 /* HostSitePictureCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostSitePictureCollectionViewCell.swift; sourceTree = "<group>"; };
+		3933D8251DBEE5E800F424F4 /* Months.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Months.swift; sourceTree = "<group>"; };
 		5D1BEC83EB2DBF20B30D926E /* Pods-GlobalWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalWork.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalWork/Pods-GlobalWork.release.xcconfig"; sourceTree = "<group>"; };
 		D70F19D27A9B2D4F5FC28AE9 /* Pods-GlobalWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalWork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalWork/Pods-GlobalWork.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 				3906E56B1DB5611C00107108 /* User.swift */,
 				3906E56F1DB5645200107108 /* Message.swift */,
 				3906E5711DB5649D00107108 /* Profile.swift */,
+				3933D8251DBEE5E800F424F4 /* Months.swift */,
 				3906E5731DB564B500107108 /* Feedback.swift */,
 				3906E5751DB564C200107108 /* Conversations.swift */,
 				3906E59D1DB6AD2D00107108 /* Stylesheet.swift */,
@@ -362,6 +365,7 @@
 				3906E5881DB56AC700107108 /* TravelerTableViewCell.swift in Sources */,
 				3906E5861DB569D200107108 /* HostTableViewCell.swift in Sources */,
 				3906E58C1DB5A49500107108 /* HostDashboardViewController.swift in Sources */,
+				3933D8261DBEE5E800F424F4 /* Months.swift in Sources */,
 				3906E5811DB5686F00107108 /* PublicTravelerProfileViewController.swift in Sources */,
 				3906E56C1DB5611C00107108 /* User.swift in Sources */,
 				3906E57D1DB5684600107108 /* PublicHostProfileViewController.swift in Sources */,

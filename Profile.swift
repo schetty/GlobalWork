@@ -13,17 +13,17 @@ struct Profile {
     
     
     let isHost:Bool?
-    var displayName: String?
+    var displayName: String!
     var countriesVisiting:[String]
     let userDescription:String?
     var languagesSpoken:String?
     let tagline:String?
     let dateOfBirth:String!
     //    var userFeedbacks:[Dictionary]
-    var profilePhotoURL:String = ""
+    var profilePhotoURL:String?
     var datesHelpNeeded:[String]
     let location: String?
-    //    let hostSitePhotoURL:String?
+//    let hostSitePhotoURL:String?
     let ref: FIRDatabaseReference?
     
     
@@ -43,22 +43,6 @@ struct Profile {
     }
     
 }
-//
-//init(snapshot: FIRDataSnapshot) {
-//    
-//    ref = snapshot.ref
-//    
-//    let snapshotValue = snapshot.value as! [String:AnyObject]
-//    displayName = snapshotValue["displayName"] as? String
-//    languagesSpoken = snapshotValue["langsSpoken"] as? String
-//    countriesVisiting = (snapshotValue["countriesVisiting"] as? [String])!
-//    tagline = snapshotValue["tagline"] as? String
-//    userDescription = snapshotValue["userDescription"] as? String
-//    dateOfBirth = snapshotValue["DOB"] as? String
-//    profilePhotoURL = (snapshotValue["profilePhotoURL"] as? String)!
-//    datesHelpNeeded = (snapshotValue["monthsHelpNeeded"] as? [String])!
-//    location = snapshotValue["userLocation"] as? String
-//    
-//}
+
 
 
