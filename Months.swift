@@ -51,8 +51,6 @@ enum Months : String {
             return 11
         case .december:
             return 12
-        default:
-            return -1
         }
     }
     

@@ -38,35 +38,13 @@ class LoginViewController: UIViewController {
             
             FIRAuth.auth()?.signIn(withEmail: self.usernameTextField.text!, password: self.passwordTextField.text!) { (user, error) in
                 
-                FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-                    if user != nil {
-                        let userUID = user!.uid
-                        FIRDatabase.database().reference().child("data/users/").child(userUID).child("isHost").observeSingleEvent(of: .value, with : { (Snapshot) in
-                            
-                            print(Snapshot)
-                            
-                            if let isAHost = Snapshot.value as? Bool {
-                                if isAHost == true {
-                                    self.performSegue(withIdentifier: "showHostDashboard", sender: self)
-                                }
-                                    
-                                else {
-                                    self.performSegue(withIdentifier: "showTravelerDashboard", sender: self)
-                                    
-                                }
-                            }
-                            print("LOGGED IN YAY!")
-                            
-                            
-                        })
-                        
-                        if (error != nil) {
-                            
-                            print(error)
-                            
-                        }
-                    }
+                
+                if (error != nil) {
+                    
+                    print(error)
+                    
                 }
+                
             }
         }
         
@@ -77,9 +55,35 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil {
+                let userUID = user!.uid
+                FIRDatabase.database().reference().child("data/users/").child(userUID).child("isHost").observeSingleEvent(of: .value, with : { (Snapshot) in
+                    
+                    print(Snapshot)
+                    
+                    if let isAHost = Snapshot.value as? Bool {
+                        if isAHost == true {
+                            self.performSegue(withIdentifier: "showHostDashboard", sender: self)
+                        }
+                            
+                        else {
+                            self.performSegue(withIdentifier: "showTravelerDashboard", sender: self)
+                            
+                        }
+                    }
+                    print("LOGGED IN YAY!")
+                    
+                    
+                })
+
+            }
+        }
+        
 
 //        if(FBSDKAccessToken.current() != nil) {
-//            
+//
 //        }
 //        let loginButton = FBSDKLoginButton()
 //        loginButton.center = view.center

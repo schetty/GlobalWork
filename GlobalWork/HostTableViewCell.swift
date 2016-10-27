@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class HostTableViewCell: UITableViewCell {
+    
+    @IBOutlet var hostProfilePhotoImageView: UIImageView!
+    
+    @IBOutlet var taglineLabel: UILabel!
+    
+    @IBOutlet var descriptionTextView: UITextView!
+    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

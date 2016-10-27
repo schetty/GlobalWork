@@ -12,8 +12,8 @@ import Firebase
 class PublicHostProfileViewController: UIViewController {
     
     var profile: Profile?
-    var arrayMonthsHelpNeeded:[String]?
-    private var monthsNeedHelp:[String]?
+    private var monthsNeedHelpString:String?
+    private var monthsNeedHelp:NSArray?
     
     // MARK: - OUTLETS & PROPERTIES for UI
     
@@ -46,14 +46,16 @@ class PublicHostProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
- 
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         checkIfUserIsLoggedIn()
-        loadUserDataFromDatabase()
+        
+       
         
         
     }
@@ -70,16 +72,51 @@ class PublicHostProfileViewController: UIViewController {
         FIRDatabase.database().reference().child("data/users/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
             
             if let snapDict = Snapshot.value as? [String : AnyObject] {
-                    print(snapDict)
-                self.monthsNeedHelp = snapDict["monthsHelpNeeded"] as! [String]?
+                print(snapDict)
+                //                self.monthsNeedHelp = snapDict["monthsHelpNeeded"] as! [String]?
+                if let profile = snapDict["profile"] as? [String : AnyObject] {
+                    
+                    self.profile = Profile(isHost: true, displayName: profile["displayName"] as! String, countriesVisiting: "none", userDescription: profile["userDescription"] as! String, languagesSpoken: profile["langsSpoken"] as! String, tagline: profile["tagline"] as! String, dateOfBirth: profile["DOB"] as! String, profilePhotoURL: profile["profileImageUrl"] as! String, datesHelpNeeded: profile["monthsHelpNeeded"] as! String, location: profile["userLocation"] as! String)
+                    
+                    self.displayNameLabel.text = self.profile?.displayName
+                    self.locationLabel.text = self.profile?.location
+                    self.descriptionTextView.text = self.profile?.userDescription
+                    self.taglineLabel.text = "'" + (self.profile?.tagline)! + "'"
+                    self.languagesLabel.text = "Languages I speak:  " + (self.profile?.languagesSpoken)!
+                    self.monthsNeedHelpString = self.profile?.datesHelpNeeded
+                    let dobStr = self.profile?.dateOfBirth
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd-MM-yyyy"
+                    if let dob = dateFormatter.date(from: dobStr!) {
+                        let calendar = Calendar.current
+                        let ageComponents = calendar.dateComponents([.year], from: dob, to: Date()).year!
+                        
+                         self.ageLabel.text = "Age: \(ageComponents)"
+                        
+                        
+                    }
+                 
+                   
+                    self.loadUserDataFromDatabase()
+                    
+                    self.fillInMonthsNeedHelp()
+                    
                 }
-            })
+            }
             
-        }
+            self.monthsNeedHelpString = self.profile?.datesHelpNeeded
+
+            
+        })
+        
+        
+
+        
+    }
     
     
     
-   private func loadUserDataFromDatabase() {
+    private func loadUserDataFromDatabase() {
         if let profileImageURL = profile?.profilePhotoURL {
             let url = NSURL(string: profileImageURL)
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
@@ -92,38 +129,32 @@ class PublicHostProfileViewController: UIViewController {
                 DispatchQueue.main.async{
                     
                     self.profileImageView.image = UIImage(data: data!)
-
-                    }
+                    
+                }
                 
                 
             }).resume()
-    }
-    
+        }
+        
     }
     
     
     private func fillInMonthsNeedHelp() {
-        let monthButtons = [januraryButton,
-                            februaryButton,
-                            marchButton,
-                            aprilButton,
-                            mayButton,
-                            juneButton,
-                            julyButton,
-                            augustButton,
-                            septemberButton,
-                            octoberButton,
-                            novemberButton,
-                            decemberButton,
-                            ]
-//        if self.arrayMonthsHelpNeeded != nil {
-////            for month in monthsNeedHelp?.count {
-////                
-////            }
-//            
-//            
-//            
-//        }
+        let monthsNeedHelpArray = self.monthsNeedHelpString?.components(separatedBy: " ")
+        
+        print(monthsNeedHelpArray)
+        
+        _ = try? monthsNeedHelpArray?.map({ (monthString) in
+            if let month = Months(rawValue: monthString){
+                let monthNumber = month.toInt()
+                if let button = self.view.viewWithTag(monthNumber) as? SSRadioButton {
+                    button.isSelected = true
+                }
+            }
+        })
+        
+        
         
     }
+    
 }

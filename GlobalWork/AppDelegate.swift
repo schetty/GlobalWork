@@ -26,6 +26,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        
+//        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+//            if user != nil {
+//                let userUID = user!.uid
+//                FIRDatabase.database().reference().child("data/users/").child(userUID).child("isHost").observeSingleEvent(of: .value, with : { (Snapshot) in
+//                    
+//                    print(Snapshot)
+//                    
+//                    if let isAHost = Snapshot.value as? Bool {
+//                        if isAHost == true {
+//                            self.performSegue(withIdentifier: "showHostDashboard", sender: self)
+//                        }
+//                            
+//                        else {
+//                            self.performSegue(withIdentifier: "showTravelerDashboard", sender: self)
+//                            
+//                        }
+//                    }
+//                    print("LOGGED IN YAY!")
+//                    
+//                    
+//                })
+//                
+//                if (error != nil) {
+//                    
+//                    print(error)
+//                    
+//                }
+//            }
+//        }
+        
+        
+        
         return true
     }
 
