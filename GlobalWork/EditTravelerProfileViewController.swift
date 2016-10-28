@@ -133,7 +133,7 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
             
             //MARK:setValue(profile.firebaseData)
             
-            let setProfile = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profile")
+            let setProfile = self.ref.child("data/users/travelers/" + "\(FIRAuth.auth()!.currentUser!.uid)/")
             
             self.userProfile = Profile(isHost: false, displayName: self.displayNameTextField.text!,  countriesVisiting: countriesUserWillVisit, userDescription: self.descriptionTextView.text, languagesSpoken: self.languagesTextField.text!, tagline: enteredTag, dateOfBirth: dobStr, /*userFeedbacks: [""],*/ profilePhotoURL: url, datesHelpNeeded: monthsHelpNeeded, location: loc)
             
@@ -232,7 +232,7 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
     
     private func registerUserIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
         let ref = FIRDatabase.database().reference(fromURL: "https://globalwork-fe6cf.firebaseio.com")
-        let usersReference = ref.child("data/users").child(uid)
+        let usersReference = ref.child("data/users/travelers/").child(uid)
         
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             

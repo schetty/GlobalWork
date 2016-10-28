@@ -60,10 +60,10 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
                     else {
                         print("User signed in")
                         let currentButton = self.radioButtonController?.selectedButton()
-
-                        self.ref.child("data/users").updateChildValues(["\(FIRAuth.auth()!.currentUser!.uid)":["Username":self.usernameTextField.text!]])
                         
                         self.setIsHost(aButton: currentButton)
+                        
+ 
                     }
                 })
                 
@@ -95,16 +95,23 @@ class SignUpViewController: UIViewController, SSRadioButtonControllerDelegate {
     
      public func setIsHost(aButton: UIButton?) {
         
-        let isHostRef = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/isHost")
+        let isHostRef = self.ref.child("data/users/hosts/" + "\(FIRAuth.auth()!.currentUser!.uid)/isHost")
+        let isTravelerRef = self.ref.child("data/users/travelers/" + "\(FIRAuth.auth()!.currentUser!.uid)/isHost")
+
         
         if (aButton == travelerRadioButton) {
-            isHostRef.setValue(false)
+            //is not a host -- is a traveler
+            self.ref.child("data/users/travelers/").updateChildValues(["\(FIRAuth.auth()!.currentUser!.uid)":["Username":self.usernameTextField.text!]])
+            
+            isTravelerRef.setValue(false)
             
             self.performSegue(withIdentifier: "travelerDashboard", sender: self)
 
         }
         
         else if (aButton == hostRadioButton) {
+            self.ref.child("data/users/hosts/").updateChildValues(["\(FIRAuth.auth()!.currentUser!.uid)":["Username":self.usernameTextField.text!]])
+            
             isHostRef.setValue(true)
             
             self.performSegue(withIdentifier: "hostDashboard", sender: self)

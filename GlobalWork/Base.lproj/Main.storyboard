@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="GlobalWork" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogIn" id="BYZ-38-t0r" customClass="LoginViewController" customModule="GlobalWork" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -1665,7 +1665,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gGZ-fP-cAR">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HostCell" rowHeight="70" id="e4e-Cw-TNz" customClass="HostTableViewCell" customModule="GlobalWork" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="hostCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="hostCell" rowHeight="70" id="e4e-Cw-TNz" customClass="HostTableViewCell" customModule="GlobalWork" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4e-Cw-TNz" id="f5W-GP-ImR">
@@ -1678,8 +1678,8 @@
                                                         <constraint firstAttribute="height" constant="80" id="tU1-oT-4Xc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tagline  label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-yW-RJS">
-                                                    <fontDescription key="fontDescription" name="DiwanMishafi" family="Mishafi" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tagline label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-yW-RJS">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1705,10 +1705,13 @@
                                                 <constraint firstItem="6Xz-yW-RJS" firstAttribute="leading" secondItem="7i6-TY-qPr" secondAttribute="trailing" constant="8" id="9Qk-7F-4lL"/>
                                                 <constraint firstAttribute="trailing" secondItem="4E6-UL-fyG" secondAttribute="trailing" constant="4" id="IHg-JE-WK3"/>
                                                 <constraint firstItem="6Xz-yW-RJS" firstAttribute="top" secondItem="f5W-GP-ImR" secondAttribute="topMargin" constant="-3" id="XkY-gc-tns"/>
-                                                <constraint firstItem="4E6-UL-fyG" firstAttribute="top" secondItem="6Xz-yW-RJS" secondAttribute="bottom" constant="-11" id="Zmf-7B-EJv"/>
+                                                <constraint firstItem="4E6-UL-fyG" firstAttribute="top" secondItem="6Xz-yW-RJS" secondAttribute="bottom" constant="-1" id="Zmf-7B-EJv"/>
                                                 <constraint firstItem="7i6-TY-qPr" firstAttribute="leading" secondItem="f5W-GP-ImR" secondAttribute="leading" constant="8" id="fev-zk-NfL"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="hostCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="descriptionTextView" destination="4E6-UL-fyG" id="sTI-WX-ELj"/>
                                             <outlet property="hostProfilePhotoImageView" destination="7i6-TY-qPr" id="UwN-dT-f6M"/>
@@ -1717,8 +1720,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="KZP-ED-jKO" id="SPN-j7-epA"/>
-                                    <outlet property="delegate" destination="KZP-ED-jKO" id="Oyb-Uf-NEW"/>
+                                    <outlet property="dataSource" destination="KZP-ED-jKO" id="SxK-Hp-XNJ"/>
+                                    <outlet property="delegate" destination="KZP-ED-jKO" id="er9-7I-5Ja"/>
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hosts in countries you will be visiting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQq-rh-Qzj">
@@ -1751,6 +1754,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="hostsAvailableTableView" destination="gGZ-fP-cAR" id="cM4-Cc-5cq"/>
                         <outlet property="profileImageView" destination="odn-pg-1gl" id="cso-6g-gMP"/>
                     </connections>
                 </viewController>
@@ -3054,7 +3058,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rxK-qB-2d6"/>
+        <segue reference="uJc-OJ-eZJ"/>
         <segue reference="cWv-hv-cJb"/>
     </inferredMetricsTieBreakers>
 </document>

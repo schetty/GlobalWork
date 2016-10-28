@@ -130,7 +130,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
             
             //MARK:setValue(profile.firebaseData)
 
-            let setProfile = self.ref.child("data/users/" + "\(FIRAuth.auth()!.currentUser!.uid)/profile")
+            let setProfile = self.ref.child("data/users/hosts/" + "\(FIRAuth.auth()!.currentUser!.uid)")
             
             self.userProfile = Profile(isHost: true, displayName: self.displayNameTextField.text!,  countriesVisiting: "none", userDescription: self.descriptionTextView.text, languagesSpoken: self.languagesTextField.text!, tagline: enteredTag, dateOfBirth: dobStr, /*userFeedbacks: [""],*/ profilePhotoURL: url, datesHelpNeeded: monthsHelpNeeded, location: loc)
             
@@ -229,7 +229,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     private func registerUserIntoDatabaseWithUID(uid: String, values: [String: AnyObject]) {
         let ref = FIRDatabase.database().reference(fromURL: "https://globalwork-fe6cf.firebaseio.com")
-        let usersReference = ref.child("data/users").child(uid)
+        let usersReference = ref.child("data/users/hosts/").child(uid)
         
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             

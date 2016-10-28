@@ -26,39 +26,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        window = UIWindow()
+        let storyboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let launchStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
         
-//        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-//            if user != nil {
-//                let userUID = user!.uid
-//                FIRDatabase.database().reference().child("data/users/").child(userUID).child("isHost").observeSingleEvent(of: .value, with : { (Snapshot) in
-//                    
-//                    print(Snapshot)
-//                    
-//                    if let isAHost = Snapshot.value as? Bool {
-//                        if isAHost == true {
-//                            self.performSegue(withIdentifier: "showHostDashboard", sender: self)
-//                        }
-//                            
-//                        else {
-//                            self.performSegue(withIdentifier: "showTravelerDashboard", sender: self)
-//                            
-//                        }
-//                    }
-//                    print("LOGGED IN YAY!")
-//                    
-//                    
-//                })
-//                
-//                if (error != nil) {
-//                    
-//                    print(error)
-//                    
-//                }
-//            }
-//        }
+        window?.rootViewController = launchStoryboard.instantiateInitialViewController()
+        window?.makeKeyAndVisible()
         
-        
-        
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if let user = user {
+                FIRDatabase.database().reference().child("data/users/").child("hosts/").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    print(snapshot)
+                    
+                    
+                    
+                    if snapshot.value is NSNull {
+                        
+                        self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "dashboard-traveler")
+                        
+                        
+                    } else {
+                        
+                        self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "dashboard-host")
+                    }
+                })
+                
+            }else{
+                self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "LogIn")
+            }
+        }
+
         return true
     }
 

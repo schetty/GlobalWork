@@ -36,6 +36,7 @@
 		3933D8261DBEE5E800F424F4 /* Months.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3933D8251DBEE5E800F424F4 /* Months.swift */; };
 		39C0458D1DC1443000B7ACF6 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0458C1DC1443000B7ACF6 /* Animations.swift */; };
 		39C0458F1DC1C4FA00B7ACF6 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0458E1DC1C4FA00B7ACF6 /* Countries.swift */; };
+		39C045931DC2BB1900B7ACF6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C045921DC2BB1900B7ACF6 /* Constants.swift */; };
 		FB4BE1F26A9F7C2CCBC697C2 /* Pods_GlobalWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB9FF0D369460D67246CE6B /* Pods_GlobalWork.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		3933D8251DBEE5E800F424F4 /* Months.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Months.swift; path = ../Months.swift; sourceTree = "<group>"; };
 		39C0458C1DC1443000B7ACF6 /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		39C0458E1DC1C4FA00B7ACF6 /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Countries.swift; path = ../Countries.swift; sourceTree = "<group>"; };
+		39C045921DC2BB1900B7ACF6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D1BEC83EB2DBF20B30D926E /* Pods-GlobalWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalWork.release.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalWork/Pods-GlobalWork.release.xcconfig"; sourceTree = "<group>"; };
 		D70F19D27A9B2D4F5FC28AE9 /* Pods-GlobalWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalWork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GlobalWork/Pods-GlobalWork.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				3906E5711DB5649D00107108 /* Profile.swift */,
 				3906E5731DB564B500107108 /* Feedback.swift */,
 				3906E5751DB564C200107108 /* Conversations.swift */,
+				39C045921DC2BB1900B7ACF6 /* Constants.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -389,6 +392,7 @@
 				3906E5861DB569D200107108 /* HostTableViewCell.swift in Sources */,
 				3906E58C1DB5A49500107108 /* HostDashboardViewController.swift in Sources */,
 				3933D8261DBEE5E800F424F4 /* Months.swift in Sources */,
+				39C045931DC2BB1900B7ACF6 /* Constants.swift in Sources */,
 				3906E5811DB5686F00107108 /* PublicTravelerProfileViewController.swift in Sources */,
 				3906E56C1DB5611C00107108 /* User.swift in Sources */,
 				3906E57D1DB5684600107108 /* PublicHostProfileViewController.swift in Sources */,

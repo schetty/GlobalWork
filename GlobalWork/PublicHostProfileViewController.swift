@@ -69,12 +69,9 @@ class PublicHostProfileViewController: UIViewController {
             return
         }
         
-        FIRDatabase.database().reference().child("data/users/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
+        FIRDatabase.database().reference().child("data/users/hosts/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
             
-            if let snapDict = Snapshot.value as? [String : AnyObject] {
-                print(snapDict)
-                //                self.monthsNeedHelp = snapDict["monthsHelpNeeded"] as! [String]?
-                if let profile = snapDict["profile"] as? [String : AnyObject] {
+            if let profile = Snapshot.value as? [String : AnyObject] {
                     
                     self.profile = Profile(isHost: true, displayName: profile["displayName"] as! String, countriesVisiting: "none", userDescription: profile["userDescription"] as! String, languagesSpoken: profile["langsSpoken"] as! String, tagline: profile["tagline"] as! String, dateOfBirth: profile["DOB"] as! String, profilePhotoURL: profile["profileImageUrl"] as! String, datesHelpNeeded: profile["monthsHelpNeeded"] as! String, location: profile["userLocation"] as! String)
                     
@@ -102,7 +99,6 @@ class PublicHostProfileViewController: UIViewController {
                     self.fillInMonthsNeedHelp()
                     
                 }
-            }
             
             self.monthsNeedHelpString = self.profile?.datesHelpNeeded
 
