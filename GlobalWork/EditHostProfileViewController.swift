@@ -234,7 +234,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if err != nil {
-                print(err)
+                print(err!)
                 return
             }
         })
@@ -250,7 +250,7 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
                 
                 if error != nil {
                     imageCompletion(nil)
-                    print(error)
+                    print(error!)
                     return
                     
                 }

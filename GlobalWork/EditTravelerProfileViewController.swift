@@ -237,7 +237,7 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if err != nil {
-                print(err)
+                print(err!)
                 return
             }
         })
@@ -253,7 +253,7 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
                 
                 if error != nil {
                     imageCompletion(nil)
-                    print(error)
+                    print(error!)
                     return
                     
                 }

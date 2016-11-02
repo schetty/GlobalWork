@@ -9,9 +9,11 @@ pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'FacebookShare'
-  # Pods for GlobalWork
+#pod 'FacebookCore'
+#pod 'FacebookLogin'
+#pod 'FacebookShare'
+pod 'PKHUD', '~> 4.0'
+
+# Pods for GlobalWork
 
 end

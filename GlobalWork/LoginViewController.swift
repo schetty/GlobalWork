@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FBSDKLoginKit
 import Firebase
 
 
@@ -41,7 +40,7 @@ class LoginViewController: UIViewController {
                 
                 if (error != nil) {
                     
-                    print(error)
+                    print(error!)
                     
                 }
                 
@@ -76,6 +75,8 @@ class LoginViewController: UIViewController {
             }
         }
         
+        
+        
 
 //        if(FBSDKAccessToken.current() != nil) {
 //
@@ -85,6 +86,24 @@ class LoginViewController: UIViewController {
 //        view.addSubview(loginButton)
     
     }
-
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        
+//        if segue.identifier == "showHostDashboard" {
+//            if let rootDashboardViewController = storyboard!.instantiateViewController(withIdentifier: "dashboard-host") as? HostDashboardViewController {
+//                let navController = UINavigationController(rootViewController: rootDashboardViewController)
+//        
+//            }
+//        }
+//        
+//        if let rootDashboardViewController = storyboard!.instantiateViewController(withIdentifier: "dashboard-traveler") as? TravelerDashboardViewController {
+//            let navController = UINavigationController(rootViewController: rootDashboardViewController)
+//
+//            
+//        }
+//        
+//    }
+    
 
 }

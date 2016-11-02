@@ -11,7 +11,11 @@ import Firebase
 
 class PublicHostProfileViewController: UIViewController {
     
-    var profile: Profile?
+    var profile: Profile? {
+        didSet {
+            navigationItem.title = profile?.displayName
+        }
+    }
     private var monthsNeedHelpString:String?
     private var monthsNeedHelp:NSArray?
     
@@ -38,10 +42,22 @@ class PublicHostProfileViewController: UIViewController {
     @IBOutlet var octoberButton: SSRadioButton!
     @IBOutlet var novemberButton: SSRadioButton!
     @IBOutlet var decemberButton: SSRadioButton!
+    var ref: FIRDatabaseReference!
+    var uid:String!
+    var currentUserId:String!
+    
     
     @IBOutlet var descriptionTextView: UITextView!
     
-    var ref: FIRDatabaseReference!
+    
+    
+    @IBAction func didPressChatButton(_ sender: UIButton) {
+        showChatControllerWithUser(user: profile!, andUserId: uid ?? "ghost")
+        
+    }
+    
+    
+ 
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,23 +69,32 @@ class PublicHostProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkIfUserIsLoggedIn()
+
         
+        if (uid == FIRAuth.auth()?.currentUser?.uid) {
+            checkIfUserIsLoggedIn(uid: uid!)
+            self.currentUserId = uid
+        }
+        
+        else {
+            
+            checkIfUserIsLoggedIn(uid: self.uid!)
+            self.currentUserId = uid
+
+        }
        
-        
         
     }
     
     
-    func checkIfUserIsLoggedIn () {
-        let uid = FIRAuth.auth()?.currentUser?.uid
+    func checkIfUserIsLoggedIn(uid:String) {
         
         if (uid == nil) {
             print("not logged in")
             return
         }
         
-        FIRDatabase.database().reference().child("data/users/hosts/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
+        FIRDatabase.database().reference().child("data/users/hosts/").child(uid).observeSingleEvent(of: .value, with : { (Snapshot) in
             
             if let profile = Snapshot.value as? [String : AnyObject] {
                     
@@ -90,7 +115,6 @@ class PublicHostProfileViewController: UIViewController {
                         
                          self.ageLabel.text = "Age: \(ageComponents)"
                         
-                        
                     }
                  
                    
@@ -104,12 +128,9 @@ class PublicHostProfileViewController: UIViewController {
 
             
         })
-        
-        
 
         
     }
-    
     
     
     private func loadUserDataFromDatabase() {
@@ -118,7 +139,7 @@ class PublicHostProfileViewController: UIViewController {
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
                 
                 if error != nil {
-                    print(error)
+                    print(error!)
                     return
                 }
                 
@@ -137,9 +158,7 @@ class PublicHostProfileViewController: UIViewController {
     
     private func fillInMonthsNeedHelp() {
         let monthsNeedHelpArray = self.monthsNeedHelpString?.components(separatedBy: " ")
-        
-        print(monthsNeedHelpArray)
-        
+                
         _ = try? monthsNeedHelpArray?.map({ (monthString) in
             if let month = Months(rawValue: monthString){
                 let monthNumber = month.toInt()
@@ -152,5 +171,15 @@ class PublicHostProfileViewController: UIViewController {
         
         
     }
+    
+    
+    func showChatControllerWithUser(user: Profile, andUserId:String) {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        self.present(chatLogController, animated: true, completion: nil)
+        chatLogController.profile = user
+        chatLogController.toId = andUserId
+        
+    }
+
     
 }

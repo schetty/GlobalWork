@@ -120,7 +120,7 @@ class PublicTravelerProfileViewController: UIViewController {
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
                 
                 if error != nil {
-                    print(error)
+                    print(error!)
                     return
                 }
                 
@@ -140,7 +140,7 @@ class PublicTravelerProfileViewController: UIViewController {
     private func fillInMonthsNeedHelp() {
         let monthsNeedHelpArray = self.monthsNeedHelpString?.components(separatedBy: " ")
         
-        print(monthsNeedHelpArray)
+        print(monthsNeedHelpArray ?? "no months here")
         
         _ = try? monthsNeedHelpArray?.map({ (monthString) in
             if let month = Months(rawValue: monthString){

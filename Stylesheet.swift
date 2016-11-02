@@ -54,3 +54,21 @@ extension UIColor {
         
     }
 }
+extension UIColor {
+    
+    class func mischka() -> UIColor {
+        
+        return UIColor(red:0.84, green:0.84, blue:0.88, alpha:1.00)
+        
+    }
+}
+extension UIColor {
+    
+    class func hummingBird() -> UIColor {
+        
+        return UIColor(red:0.80, green:0.95, blue:0.94, alpha:1.00)
+
+        
+    }
+}
+

@@ -8,13 +8,17 @@
 
 import UIKit
 import Firebase
+import PKHUD
+
 
 class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
-
+    
     var hosts:[Profile] = []
+    var hostUIDS:[String] = []
+    var hostImages:[UIImage] = []
     let uid = FIRAuth.auth()?.currentUser?.uid
     var snapShotDictionary = [String : Any]()
-    var hostImage: UIImage?
+    var selectedIndex:IndexPath?
     
     
     //MARK : Properties
@@ -25,15 +29,13 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
     
     @IBOutlet var hostsAvailableTableView: UITableView!
     
-    
     @IBOutlet var profileImageView: UIImageView!
-    
     
     
     // MARK: UITableView Delegate methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hosts.count
+        return self.hosts.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,10 +45,10 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "hostCell", for: indexPath) as! HostTableViewCell
-        let host = hosts[indexPath.row]
-        cell.taglineLabel.text = host.tagline
-        cell.descriptionTextView.text = host.userDescription
-        cell.hostProfilePhotoImageView.image = self.hostImage
+        
+        //        cell.profile = self.hosts[indexPath.row]
+        
+        cell.configureWithHostProfile(profile: self.hosts[indexPath.row])
         
         return cell
     }
@@ -56,15 +58,27 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
- 
+        self.selectedIndex = indexPath
+        self.performSegue(withIdentifier: "showSelectedHost", sender: self)
+
     }
     
-    
-    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if segue.identifier == "showSelectedHost" {
+            let destinationVC = segue.destination as! PublicHostProfileViewController
+            if let row = selectedIndex?.row {
+                destinationVC.uid = hostUIDS[row]
+                destinationVC.profile = self.hosts[row]
+                
+            }
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,42 +86,18 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
         hostsAvailableTableView.delegate = self
         hostsAvailableTableView.dataSource = self
         
+        self.profileImageView.layer.borderWidth = 1.0
+        self.profileImageView.layer.masksToBounds = false
+        self.profileImageView.layer.borderColor = UIColor.white.cgColor
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2
+        self.profileImageView.clipsToBounds = true
+
+        
         checkIfUserIsLoggedIn()
-        fetchHosts()
+        
         
     }
     
-    
-    private func checkIfUserIsLoggedIn () {
-        
-        if (uid == nil) {
-            print("not logged in")
-            return
-        }
-        
-        FIRDatabase.database().reference().child("data/users/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
-            
-            if let snapDict = Snapshot.value as? [String : AnyObject] {
-                
-                if let profile = snapDict["profile"] as? [String : AnyObject] {
-                    
-                    self.profile = Profile(isHost: snapDict["isHost"] as! Bool, displayName: profile["displayName"] as! String, countriesVisiting: "none", userDescription: profile["userDescription"] as! String, languagesSpoken: profile["langsSpoken"] as! String, tagline: profile["tagline"] as! String, dateOfBirth: profile["DOB"] as! String, profilePhotoURL: profile["profileImageUrl"] as! String, datesHelpNeeded: profile["monthsHelpNeeded"] as! String, location: profile["userLocation"] as! String)
-                    
-                    if (self.profile.profilePhotoURL != "" || self.profile.profilePhotoURL != nil) {
-                        
-                        self.loadUserDataFromDatabase(withURL: self.profile.profilePhotoURL!)
-                        
-                    }
-                        
-                    else {
-                        return
-                    }
-                }
-                
-            }
-        })
-        
-    }
     
     private func loadUserDataFromDatabase(withURL:String!) {
         if let profileImageURL = withURL {
@@ -115,11 +105,11 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
                 
                 if error != nil {
-                    print(error)
+                    print(error!)
                     return
                 }
                 
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     
                     self.profileImageView.image = UIImage(data: data!)
                     
@@ -131,64 +121,73 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
         
     }
     
+
     
-    private func loadHostsPhotoFromDatabase(fromProfiles: [Profile]) {
-        for aProfile in fromProfiles {
-        if let profileImageURL = aProfile.profilePhotoURL {
-            let url = NSURL(string: profileImageURL)
-            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+    private func checkIfUserIsLoggedIn () {
+        
+        if (uid == nil) {
+            print("not logged in")
+            return
+        }
+        
+        FIRDatabase.database().reference().child("data/users/travelers/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
+            
+            if let snapDict = Snapshot.value as? [String : AnyObject] {
                 
-                if error != nil {
-                    print(error)
-                    return
+                self.profile = Profile(isHost: false, displayName: snapDict["displayName"] as! String, countriesVisiting: snapDict["countriesVisiting"] as! String, userDescription: snapDict["userDescription"] as! String, languagesSpoken: snapDict["langsSpoken"] as! String, tagline: snapDict["tagline"] as! String, dateOfBirth: snapDict["DOB"] as! String, profilePhotoURL: snapDict["profileImageUrl"] as! String, datesHelpNeeded: snapDict["monthsHelpNeeded"] as! String, location: snapDict["userLocation"] as! String)
+                
+                if (self.profile.profilePhotoURL != "" || self.profile.profilePhotoURL != nil) {
+                    
+                    self.loadUserDataFromDatabase(withURL: self.profile.profilePhotoURL!)
+                    
                 }
                 
-                    self.hostImage = UIImage(data: data!)
-                    self.hostsAvailableTableView.reloadData()
                 
-                }).resume()
             }
-        }
+            self.fetchHosts()
+            
+        })
         
     }
     
-    private func fetchHosts () {
+    
+    func fetchHosts() {
         
         FIRDatabase.database().reference().child("data/users/hosts/").observeSingleEvent(of: .value, with: {
             (snapshot) in
-            //            if let snapShotDictionary = snapshot.value as? [String : AnyObject] {
             
             if (snapshot.value == nil) {
                 print("nothing found")
+                return
             }
-                
-            else {
-                guard let userProfile = snapshot.value else {
-                    print("this user has no profile")
-                    return
-                }
-                
-                
+            
+            HUD.flash(.progress, delay: 1.0) { finished in
                 for child in snapshot.children.allObjects as? [FIRDataSnapshot] ?? [] {
+                    let hostUID = child.key
+                    self.hostUIDS.append(hostUID)
                     if let value = child.value as? [String: Any] {
                         
-                        let profile = Profile.init(isHost: true, displayName: value["displayName"] as! String, countriesVisiting: value["countriesVisiting"] as! String, userDescription: value["userDescription"] as! String, languagesSpoken: value["langsSpoken"] as! String, tagline: value["tagline"] as! String, dateOfBirth: value["DOB"] as! String, profilePhotoURL: value["profileImageUrl"] as! String, datesHelpNeeded: value["monthsHelpNeeded"] as! String, location: value["userLocation"] as! String)
+                        let profile = Profile.init(isHost: true, displayName: value["displayName"] as! String,countriesVisiting: value["countriesVisiting"] as! String, userDescription: value["userDescription"] as! String, languagesSpoken: value["langsSpoken"] as! String, tagline: value["tagline"] as! String, dateOfBirth: value["DOB"] as! String, profilePhotoURL: value["profileImageUrl"] as! String, datesHelpNeeded: value["monthsHelpNeeded"] as! String, location: value["userLocation"] as! String)
                         
                         self.hosts.append(profile)
                         
+
+                        
                     }
-                    
                     
                 }
                 
-                self.loadHostsPhotoFromDatabase(fromProfiles: self.hosts)
+                
                 
                 self.hostsAvailableTableView.reloadData()
                 
             }
             
+            
         })
         
         
     }
+    
+    
 }
