@@ -19,6 +19,7 @@ class PublicHostProfileViewController: UIViewController {
     private var monthsNeedHelpString:String?
     private var monthsNeedHelp:NSArray?
     
+    
     // MARK: - OUTLETS & PROPERTIES for UI
     
     @IBOutlet var profileImageView: UIImageView!

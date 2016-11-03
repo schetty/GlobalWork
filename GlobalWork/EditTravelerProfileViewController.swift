@@ -130,7 +130,6 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
             }
             
             
-            
             //MARK:setValue(profile.firebaseData)
             
             let setProfile = self.ref.child("data/users/travelers/" + "\(FIRAuth.auth()!.currentUser!.uid)/")
@@ -149,7 +148,6 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
             
         }
     }
-    
     
     
     // MARK : programatically adding placeholder text and radio buttons
@@ -188,9 +186,7 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
         profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.size.width/2
         profilePhotoImageView.clipsToBounds = true
         
-        
     }
-    
     
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !descriptionTextView.text.isEmpty
@@ -266,11 +262,7 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
                 
                 if let profilePicURL =  metadata?.downloadURL()?.absoluteString {
                     imageCompletion(profilePicURL)
-                    //self.sendProfilePhotoToDatabaseWithUID(uid: (FIRAuth.auth()!.currentUser!.uid))
-                    //                    self.userProfile.profilePhotoURL = profilePicURL
-                    //                    let values = ["profileImageUrl": profilePicURL]
-                    
-                    //                    self.registerUserIntoDatabaseWithUID(uid: uid, values: values as [String : AnyObject])
+               
                 } else {
                     imageCompletion(nil)
                 }
@@ -337,33 +329,14 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
     
     
     
-    
-    
-    
-    
-    
-    
-    //MARK: - Collection View Delegate Methods
-    //
-    //   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    //
-    //    return 0
-    //    }
-    //
-    //
-    //
-    //    @nonobjc func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    //        let cell = collectionViewHostPhotos.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as!HostSitePictureCollectionViewCell
-    //        cell.backgroundColor = UIColor.cyan
-    //
-    //        return cell
-    //    }
-    //    
-    //    
-    //
-    //   func numberOfSections(in collectionView: UICollectionView) -> Int {
-    //    
-    //    return 0
-    //    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if segue.identifier == "showPublicTravelerProfile" {
+            let destinationVC = segue.destination as! PublicTravelerProfileViewController
+            destinationVC.uid = FIRAuth.auth()?.currentUser?.uid
+            destinationVC.profile = self.userProfile
+            
+            
+        }
+    }
     
 }

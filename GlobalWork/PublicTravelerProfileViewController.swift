@@ -113,9 +113,7 @@ class PublicTravelerProfileViewController: UIViewController {
                     
                 }
                 
-                
                 self.loadUserDataFromDatabase()
-                
                 self.fillInMonthsNeedHelp()
                 
             }
