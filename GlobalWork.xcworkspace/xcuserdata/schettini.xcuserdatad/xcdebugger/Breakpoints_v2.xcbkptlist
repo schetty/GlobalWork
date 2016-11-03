@@ -51,29 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GlobalWork/HostDashboardViewController.swift"
-            timestampString = "499855373.797887"
+            filePath = "GlobalWork/HostsTableViewController.swift"
+            timestampString = "499893376.521111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "loadUserDataFromDatabase(withURL:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GlobalWork/HostDashboardViewController.swift"
-            timestampString = "499855376.042104"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "loadUserDataFromDatabase(withURL:)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "getHostsFromCountry(country:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

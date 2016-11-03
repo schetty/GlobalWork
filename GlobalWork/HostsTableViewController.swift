@@ -7,89 +7,106 @@
 //
 
 import UIKit
+import Firebase
 
 class HostsTableViewController: UITableViewController {
+    
+    var selectedHostUID:String?
+    var selectedHostProfile:Profile?
+    var searchCountryString:String?
+    var hosts:[Profile] = []
+    var hostUIDS:[String] = []
+    var hostImages:[UIImage] = []
+    var selectedIndex:IndexPath?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        getHostsFromCountry(country: searchCountryString)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func getHostsFromCountry(country:String?) {
+        let country = searchCountryString
+        let ref = FIRDatabase.database().reference().child("data/users/hosts/")
+        ref.queryOrdered(byChild: "userLocation").queryEqual(toValue: country).observe(.value, with: { (snapshot) in
+            
+            if (snapshot.value is NSNull) {
+                let alert = UIAlertController(title: "oh No! :(",
+                                              message: "There are no hosts in that country yet!",
+                                              preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                for child in snapshot.children.allObjects as? [FIRDataSnapshot] ?? [] {
+                    let hostUID = child.key
+                    self.hostUIDS.append(hostUID)
+                    if let value = child.value as? [String: Any] {
+                        if (value["profileImageUrl"] != nil) {
+                            let profile = Profile.init(isHost: true, displayName: value["displayName"] as! String,countriesVisiting: value["countriesVisiting"] as! String, userDescription: value["userDescription"] as! String, languagesSpoken: value["langsSpoken"] as! String, tagline: value["tagline"] as! String, dateOfBirth: value["DOB"] as! String, profilePhotoURL: value["profileImageUrl"] as! String, datesHelpNeeded: value["monthsHelpNeeded"] as! String, location: value["userLocation"] as! String)
+                            
+                            self.hosts.append(profile)
+                        }
+                    }
+                    
+                    self.tableView.reloadData()
+                    
+                }
+            }
+            
+        }, withCancel: nil)
     }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.hosts.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: hostTableViewCellIdentifier, for: indexPath) as! HostTableViewCell
+        
+        cell.configureWithHostProfile(profile: self.hosts[indexPath.row])
+        
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+    
+    override func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath
+        self.performSegue(withIdentifier: segueShowProfileForeSelectedHost, sender: self)
+        
+    }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if segue.identifier == segueShowProfileForeSelectedHost {
+            let destinationVC = segue.destination as! PublicHostProfileViewController
+            if let row = selectedIndex?.row {
+                destinationVC.uid = hostUIDS[row]
+                destinationVC.profile = self.hosts[row]
+            }
+            
+        }
 
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

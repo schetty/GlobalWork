@@ -13,7 +13,7 @@ pod 'Firebase/Storage'
 #pod 'FacebookLogin'
 #pod 'FacebookShare'
 pod 'PKHUD', '~> 4.0'
-pod 'SwiftLocation', '>= 1.0.6'
+#pod 'SwiftLocation', '>= 1.0.6'
 # Pods for GlobalWork
 
 end

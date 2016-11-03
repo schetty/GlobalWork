@@ -14,25 +14,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftLocation.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7F66415DC7036F0B2B9B65F8622E38B0</key>
+		<key>06E7B4A7A06BDEF0476B1A41C1A1295A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>D7A75F149082140741FC1E0B5B2863C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E771864891877DF2D23E4B836F1EA87D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

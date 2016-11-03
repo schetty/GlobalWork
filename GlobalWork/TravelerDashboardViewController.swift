@@ -10,7 +10,10 @@ import UIKit
 import Firebase
 import PKHUD
 
-
+//MARK: constants
+var segueIdentifierForSearchHost = "showHostsFromEnteredCountry"
+var segueShowProfileForeSelectedHost = "showSelectedHost"
+var hostTableViewCellIdentifier = "hostCell"
 
 class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     
@@ -27,7 +30,7 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
     
     var profile: Profile!
     
-    //MARK : Outlets 
+    //MARK : Outlets
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
@@ -46,15 +49,13 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
                        options: .curveLinear,
                        animations: {
                         self.goButton.transform = CGAffineTransform.identity
-            }, completion: nil)
+        }, completion: nil)
         iconButton.addTarget(self, action: "tappedRightButton", for: .touchUpInside)
-
+        
         }
     }
-
-
-    @IBAction func didPressGoButton(_ sender: UIButton) {
-    }
+    
+    
     @IBOutlet weak var enteredCountryTextField: UITextField!
     
     @IBOutlet var hostsAvailableTableView: UITableView!
@@ -74,7 +75,7 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "hostCell", for: indexPath) as! HostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: hostTableViewCellIdentifier, for: indexPath) as! HostTableViewCell
         
         //        cell.profile = self.hosts[indexPath.row]
         
@@ -93,12 +94,12 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedIndex = indexPath
-        self.performSegue(withIdentifier: "showSelectedHost", sender: self)
-
+        self.performSegue(withIdentifier: segueShowProfileForeSelectedHost, sender: self)
+        
     }
     
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +112,7 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
         self.profileImageView.layer.borderColor = UIColor.white.cgColor
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2
         self.profileImageView.clipsToBounds = true
-
+        
         
         checkIfUserIsLoggedIn()
         
@@ -141,7 +142,7 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
         
     }
     
-
+    
     
     private func checkIfUserIsLoggedIn () {
         
@@ -155,20 +156,20 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
             if let snapDict = Snapshot.value as? [String : AnyObject] {
                 
                 if snapDict["profileImageUrl"] != nil {
-              self.profile = Profile(isHost: false, displayName: snapDict["displayName"] as! String ?? "", countriesVisiting: snapDict["countriesVisiting"] as! String ?? "", userDescription: snapDict["userDescription"] as! String ?? "", languagesSpoken: snapDict["langsSpoken"] as! String ?? "", tagline: snapDict["tagline"] as! String ?? "", dateOfBirth: snapDict["DOB"] as! String ?? "", profilePhotoURL: snapDict["profileImageUrl"] as! String ?? "", datesHelpNeeded: snapDict["monthsHelpNeeded"] as! String ?? "", location: snapDict["userLocation"] as! String )
-                
-                if (self.profile?.profilePhotoURL == nil) {
-                    return
-                }
-                else if (self.profile?.profilePhotoURL != "" || self.profile?.profilePhotoURL != nil) {
+                    self.profile = Profile(isHost: false, displayName: snapDict["displayName"] as! String ?? "", countriesVisiting: snapDict["countriesVisiting"] as! String ?? "", userDescription: snapDict["userDescription"] as! String ?? "", languagesSpoken: snapDict["langsSpoken"] as! String ?? "", tagline: snapDict["tagline"] as! String ?? "", dateOfBirth: snapDict["DOB"] as! String ?? "", profilePhotoURL: snapDict["profileImageUrl"] as! String ?? "", datesHelpNeeded: snapDict["monthsHelpNeeded"] as! String ?? "", location: snapDict["userLocation"] as! String )
                     
-                    self.loadUserDataFromDatabase(withURL: self.profile?.profilePhotoURL!)
-                    
+                    if (self.profile?.profilePhotoURL == nil) {
+                        return
+                    }
+                    else if (self.profile?.profilePhotoURL != "" || self.profile?.profilePhotoURL != nil) {
+                        
+                        self.loadUserDataFromDatabase(withURL: self.profile?.profilePhotoURL!)
+                        
                     }
                     if let countryString = self.profile?.countriesVisiting {
                         self.separateCountryNames(withCountryString: countryString)
                     }
-                
+                    
                 }
                 
                 
@@ -236,27 +237,34 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
             }
         })
     }
-
-  
+    
+    
     func tappedRightButton(){
         goButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI * 6/5))
         UIView.animate(withDuration: 1.0) {
             self.goButton.transform = CGAffineTransform.identity
             
             // segue to table view controller with hosts of that country
+            self.performSegue(withIdentifier: segueShowProfileForeSelectedHost, sender: self)
         }
     }
-        override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if segue.identifier == "showSelectedHost" {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if segue.identifier == segueShowProfileForeSelectedHost {
             let destinationVC = segue.destination as! PublicHostProfileViewController
             if let row = selectedIndex?.row {
                 destinationVC.uid = hostUIDS[row]
                 destinationVC.profile = self.hosts[row]
-                
             }
             
         }
+        if segue.identifier == segueIdentifierForSearchHost {
+            let destinationVC = segue.destination as! HostsTableViewController
+            destinationVC.searchCountryString = self.enteredCountryTextField.text
+        }
     }
+    
+
     
     func separateCountryNames(withCountryString:String?) {
         guard let countriesSeparatedBySpaces = withCountryString?.components(separatedBy: " ") else {
