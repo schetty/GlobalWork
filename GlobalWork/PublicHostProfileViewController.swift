@@ -69,19 +69,25 @@ class PublicHostProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         if (uid == FIRAuth.auth()?.currentUser?.uid) {
+            
+            let uid = FIRAuth.auth()?.currentUser?.uid
             checkIfUserIsLoggedIn(uid: uid!)
             self.currentUserId = uid
         }
         
         else {
-            
-            checkIfUserIsLoggedIn(uid: self.uid!)
+        
+            checkIfUserIsLoggedIn(uid: uid!)
             self.currentUserId = uid
 
         }
+        
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.clipsToBounds = true
        
         
     }
@@ -97,7 +103,7 @@ class PublicHostProfileViewController: UIViewController {
         FIRDatabase.database().reference().child("data/users/hosts/").child(uid).observeSingleEvent(of: .value, with : { (Snapshot) in
             
             if let profile = Snapshot.value as? [String : AnyObject] {
-                    
+                    if (profile["profileImageUrl"] != nil && profile["displayName"] != nil ) {
                     self.profile = Profile(isHost: true, displayName: profile["displayName"] as! String, countriesVisiting: "none", userDescription: profile["userDescription"] as! String, languagesSpoken: profile["langsSpoken"] as! String, tagline: profile["tagline"] as! String, dateOfBirth: profile["DOB"] as! String, profilePhotoURL: profile["profileImageUrl"] as! String, datesHelpNeeded: profile["monthsHelpNeeded"] as! String, location: profile["userLocation"] as! String)
                     
                     self.displayNameLabel.text = self.profile?.displayName
@@ -116,7 +122,8 @@ class PublicHostProfileViewController: UIViewController {
                          self.ageLabel.text = "Age: \(ageComponents)"
                         
                     }
-                 
+                }
+                
                    
                     self.loadUserDataFromDatabase()
                     

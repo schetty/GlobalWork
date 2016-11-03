@@ -42,7 +42,14 @@ class PublicTravelerProfileViewController: UIViewController {
     
     
     var ref: FIRDatabaseReference!
+    var uid:String!
+    var currentUserId:String!
     
+    
+    @IBAction func didPressChatButton(_ sender: UIButton) {
+        showChatControllerWithUser(user: profile!, andUserId: uid ?? "ghost")
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,64 +57,73 @@ class PublicTravelerProfileViewController: UIViewController {
         
     }
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkIfUserIsLoggedIn()
-        
-        
-        
+        if (uid == FIRAuth.auth()?.currentUser?.uid) {
+            checkIfUserIsLoggedIn(uid: uid!)
+            self.currentUserId = uid
+        }
+            
+        else {
+            
+            checkIfUserIsLoggedIn(uid: self.uid!)
+            self.currentUserId = uid
+            
+        }
+        profileImageView.layer.borderWidth = 1.0
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.clipsToBounds = true
         
     }
     
     
-    func checkIfUserIsLoggedIn () {
-        let uid = FIRAuth.auth()?.currentUser?.uid
+    func checkIfUserIsLoggedIn(uid:String) {
         
         if (uid == nil) {
             print("not logged in")
             return
         }
         
-        FIRDatabase.database().reference().child("data/users/travelers/").child(uid!).observeSingleEvent(of: .value, with : { (Snapshot) in
+        FIRDatabase.database().reference().child("data/users/travelers/").child(uid).observeSingleEvent(of: .value, with : { (Snapshot) in
             
             if let profile = Snapshot.value as? [String : AnyObject] {
-
+                
+                self.profile = Profile(isHost: false, displayName: profile["displayName"] as! String, countriesVisiting: profile["countriesVisiting"] as! String, userDescription: profile["userDescription"] as! String, languagesSpoken: profile["langsSpoken"] as! String, tagline: profile["tagline"] as! String, dateOfBirth: profile["DOB"] as! String, profilePhotoURL: profile["profileImageUrl"] as! String, datesHelpNeeded: profile["monthsHelpNeeded"] as! String, location: profile["userLocation"] as! String)
+                
+                self.displayNameLabel.text = self.profile?.displayName
+                self.locationLabel.text = self.profile?.location
+                self.countriesUserWillVisitLabel.text = "Countries I will be visiting:  " + (self.profile?.countriesVisiting)!
+                self.descriptionTextView.text = self.profile?.userDescription
+                self.taglineLabel.text = "'" + (self.profile?.tagline)! + "'"
+                self.languagesLabel.text = "Languages I speak:  " + (self.profile?.languagesSpoken)!
+                self.monthsNeedHelpString = self.profile?.datesHelpNeeded
+                let dobStr = self.profile?.dateOfBirth
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                if let dob = dateFormatter.date(from: dobStr!) {
+                    let calendar = Calendar.current
+                    let ageComponents = calendar.dateComponents([.year], from: dob, to: Date()).year!
                     
-                    self.profile = Profile(isHost: true, displayName: profile["displayName"] as! String, countriesVisiting: profile["countriesVisiting"] as! String, userDescription: profile["userDescription"] as! String, languagesSpoken: profile["langsSpoken"] as! String, tagline: profile["tagline"] as! String, dateOfBirth: profile["DOB"] as! String, profilePhotoURL: profile["profileImageUrl"] as! String, datesHelpNeeded: profile["monthsHelpNeeded"] as! String, location: profile["userLocation"] as! String)
-                    
-                    self.displayNameLabel.text = self.profile?.displayName
-                    self.locationLabel.text = self.profile?.location
-                    self.countriesUserWillVisitLabel.text = "Countries I'll be visiting: " + (self.profile?.countriesVisiting ?? "")
-                    self.taglineLabel.text = "'" + (self.profile?.tagline)! + "'"
-                    self.languagesLabel.text = "Languages I speak:  " + (self.profile?.languagesSpoken)!
-                    self.descriptionTextView.text = self.profile?.userDescription
-                    self.monthsNeedHelpString = self.profile?.datesHelpNeeded
-                    let dobStr = self.profile?.dateOfBirth
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "dd-MM-yyyy"
-                    if let dob = dateFormatter.date(from: dobStr!) {
-                        let calendar = Calendar.current
-                        let ageComponents = calendar.dateComponents([.year], from: dob, to: Date()).year!
-                        
-                        self.ageLabel.text = "Age: \(ageComponents)"
-                        
-                        
-                    }
-                    
-                    
-                    self.loadUserDataFromDatabase()
-                    
-                    self.fillInMonthsNeedHelp()
+                    self.ageLabel.text = "Age: \(ageComponents)"
                     
                 }
+                
+                
+                self.loadUserDataFromDatabase()
+                
+                self.fillInMonthsNeedHelp()
+                
+            }
             
             self.monthsNeedHelpString = self.profile?.datesHelpNeeded
             
             
         })
-        
-        
         
         
     }
@@ -150,9 +166,18 @@ class PublicTravelerProfileViewController: UIViewController {
                 }
             }
         })
+    }
+    
+    private func showChatControllerWithUser(user: Profile, andUserId:String) {
+            let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+            self.present(chatLogController, animated: true, completion: nil)
+            chatLogController.profile = user
+            chatLogController.toId = andUserId
+            
+        }
         
         
         
     }
     
-}
+

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_GlobalWorkVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_GlobalWorkVersionString[];
+FOUNDATION_EXPORT double SwiftLocationVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftLocationVersionString[];
 

@@ -182,6 +182,12 @@ class EditTravelerProfileViewController: UIViewController, /*UICollectionViewDel
         
         ref = FIRDatabase.database().reference()
         
+        profilePhotoImageView.layer.borderWidth = 1.0
+        profilePhotoImageView.layer.masksToBounds = false
+        profilePhotoImageView.layer.borderColor = UIColor.white.cgColor
+        profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.size.width/2
+        profilePhotoImageView.clipsToBounds = true
+        
         
     }
     

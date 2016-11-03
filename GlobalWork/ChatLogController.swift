@@ -10,11 +10,12 @@
 import UIKit
 import Firebase
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavigationBarDelegate {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavigationBarDelegate, UICollectionViewDelegateFlowLayout {
     
     var profile: Profile? {
     didSet {
     navigationItem.title = profile!.displayName
+    observeMessages()
         }
     }
     var toId:String!
@@ -30,6 +31,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavi
     }()
     
     let cellId = "cellId"
+    var messageArray = [Message]()
     
 
     override func viewDidLoad() {
@@ -37,9 +39,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavi
 
         navigationItem.title = "Chat"
         collectionView?.backgroundColor = UIColor.white
-
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 58, right: 0)
+        collectionView?.register(MessageBubbleCell.self, forCellWithReuseIdentifier: cellId)
         setupInputComponents()
 
     }
@@ -47,7 +50,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavi
     
     func setupInputComponents() {
         let containerView = UIView()
-        containerView.backgroundColor = UIColor.hummingBird()
+        containerView.backgroundColor = UIColor.white
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(containerView)
@@ -101,9 +104,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavi
         
         childRef.updateChildValues(values) { (error, ref) in
             if error != nil {
-                print(error)
+                print(error!)
                 return
             }
+            
+            self.messageTextField.text = nil
             let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId!)
             
             let messageId = childRef.key
@@ -115,6 +120,45 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavi
         
     }
     
+    func observeMessages() {
+        
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        
+        let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid)
+        
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            let messagesRef = FIRDatabase.database().reference().child("messages").child(messageId)
+            
+            
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? [String : AnyObject] else {
+                    return
+                }
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                
+                if message.chatPartnerId() == self.toId {
+                    self.messageArray.append(message)
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.collectionView?.reloadData()
+                        
+                    }
+                    
+                }
+                
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+    }
+    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()
         return true
@@ -123,17 +167,61 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UINavi
     // MARK : Table View
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return messageArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MessageBubbleCell
+        let message = messageArray[indexPath.item]
+        if let profileImageUrl = self.profile?.profilePhotoURL {
+            
+            cell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+            
+        }
+        if message.fromId == FIRAuth.auth()?.currentUser?.uid {
+            //cyan msg
+            cell.bubbleView.backgroundColor = UIColor.dullCyan()
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+            cell.profileImageView.isHidden = true
+        }
+            
+        else {
+            //gray msg
+            cell.bubbleView.backgroundColor = UIColor.hummingBird()
+            cell.textView.textColor = UIColor.darkGray
+            cell.bubbleViewLeftAnchor?.isActive = true
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.profileImageView.isHidden = false
+            
+        }
+        cell.textView.text = messageArray[indexPath.item].text
         
-        cell.backgroundColor = UIColor.blue
+        cell.bubbleWidthAnchor?.constant = estimateFrameHeightForText(text: message.text!).width + 32
+        
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var height = CGFloat(80)
+        
+        if let text = messageArray[indexPath.item].text {
+            height = estimateFrameHeightForText(text: text).height + 20
+        }
+        return CGSize(width: view.frame.width, height: height)
+    }
+    
+    private func estimateFrameHeightForText(text: String) -> CGRect {
+        
+        let size = CGSize(width: 200, height: 10000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return  NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
+        
     }
 }

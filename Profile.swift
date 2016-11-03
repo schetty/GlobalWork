@@ -18,13 +18,12 @@ struct Profile {
     let userDescription:String?
     var languagesSpoken:String?
     let tagline:String?
-    let dateOfBirth:String!
+    let dateOfBirth:String?
     //    var userFeedbacks:[Dictionary]
     var profilePhotoURL:String?
     var datesHelpNeeded:String
     let location: String?
 //    let hostSitePhotoURL:String?
-    let ref: FIRDatabaseReference?
     
     
     
@@ -39,18 +38,17 @@ struct Profile {
         self.profilePhotoURL = profilePhotoURL
         self.datesHelpNeeded = datesHelpNeeded
         self.location = location
-        self.ref = nil
     }
     
     var firbaseFormatted:NSDictionary{
              return [
-                "isHost" : NSNumber(booleanLiteral: isHost!),
+                "isHost" : NSNumber(booleanLiteral: isHost ?? true),
                 "displayName" : NSString(string:displayName),
                 "countriesVisiting" : NSString(string:countriesVisiting ?? ""),
                 "langsSpoken" :  NSString(string:languagesSpoken ?? ""),
                 "tagline" : NSString(string:tagline ?? ""),
                 "userDescription" : NSString(string:userDescription ?? ""),
-                "DOB" :  NSString(string: dateOfBirth!),
+                "DOB" :  NSString(string: dateOfBirth ?? ""),
                 "profileImageUrl" :  NSString(string:profilePhotoURL ?? ""),
                 "monthsHelpNeeded" : NSString(string:datesHelpNeeded),
                 "userLocation" :  NSString(string:location ?? "")

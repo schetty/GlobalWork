@@ -88,6 +88,11 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
     
     @IBOutlet var saveChangesButton: UIButton!
     
+    @IBAction func didPressViewProfile(_ sender: UIButton) {
+        
+    }
+    
+    @IBOutlet weak var didPressViewProfile: UIButton!
     
     @IBAction func didPressSaveChanges(_ sender: UIButton) {
         
@@ -176,6 +181,12 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         //        collectionViewHostPhotos.delegate = self
         descriptionTextView.text = placeholderText
         descriptionTextView.textColor = UIColor(white: 0, alpha: 0.3)
+        
+        profilePhotoImageView.layer.borderWidth = 1.0
+        profilePhotoImageView.layer.masksToBounds = false
+        profilePhotoImageView.layer.borderColor = UIColor.white.cgColor
+        profilePhotoImageView.layer.cornerRadius = profilePhotoImageView.frame.size.width/2
+        profilePhotoImageView.clipsToBounds = true
         
         ref = FIRDatabase.database().reference()
         
@@ -326,9 +337,17 @@ class EditHostProfileViewController: UIViewController, /*UICollectionViewDelegat
         }
     }
     
+
     
-    
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if segue.identifier == "showPublicHostProfile" {
+            let destinationVC = segue.destination as! PublicHostProfileViewController
+                destinationVC.uid = FIRAuth.auth()?.currentUser?.uid
+                destinationVC.profile = self.userProfile
+
+            
+        }
+    }
     
     
     

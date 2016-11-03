@@ -56,8 +56,8 @@ class MessagesController: UITableViewController {
                     message.setValuesForKeys(dictionaryOfMessages)
                     
                     //self.messagesArray.append(message)
-                    if let toId = message.toId {
-                        self.messagesDicitonary[toId] = message
+                    if let chatPartnerId = message.chatPartnerId() {
+                        self.messagesDicitonary[chatPartnerId] = message
                         self.messagesArray = Array(self.messagesDicitonary.values)
                         self.messagesArray.sort(by: { (m1, m2) -> Bool in
                             
@@ -68,9 +68,8 @@ class MessagesController: UITableViewController {
                         })
                     }
                     
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+                   
                 }
                 
             }, withCancel: nil)
@@ -79,6 +78,12 @@ class MessagesController: UITableViewController {
         
     }
     
+    func handleReloadTable() {
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
     
     
     // MARK: - Table view data source

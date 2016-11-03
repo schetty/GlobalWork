@@ -11,6 +11,7 @@ import Firebase
 import PKHUD
 
 
+
 class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     
     var hosts:[Profile] = []
@@ -134,12 +135,18 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
             
             if let snapDict = Snapshot.value as? [String : AnyObject] {
                 
-                self.profile = Profile(isHost: false, displayName: snapDict["displayName"] as! String, countriesVisiting: snapDict["countriesVisiting"] as! String, userDescription: snapDict["userDescription"] as! String, languagesSpoken: snapDict["langsSpoken"] as! String, tagline: snapDict["tagline"] as! String, dateOfBirth: snapDict["DOB"] as! String, profilePhotoURL: snapDict["profileImageUrl"] as! String, datesHelpNeeded: snapDict["monthsHelpNeeded"] as! String, location: snapDict["userLocation"] as! String)
+                if snapDict["profileImageUrl"] != nil {
+              self.profile = Profile(isHost: false, displayName: snapDict["displayName"] as! String ?? "", countriesVisiting: snapDict["countriesVisiting"] as! String ?? "", userDescription: snapDict["userDescription"] as! String ?? "", languagesSpoken: snapDict["langsSpoken"] as! String ?? "", tagline: snapDict["tagline"] as! String ?? "", dateOfBirth: snapDict["DOB"] as! String ?? "", profilePhotoURL: snapDict["profileImageUrl"] as! String ?? "", datesHelpNeeded: snapDict["monthsHelpNeeded"] as! String ?? "", location: snapDict["userLocation"] as! String )
                 
-                if (self.profile.profilePhotoURL != "" || self.profile.profilePhotoURL != nil) {
+                if (self.profile?.profilePhotoURL == nil) {
+                    return
+                }
+                else if (self.profile?.profilePhotoURL != "" || self.profile?.profilePhotoURL != nil) {
                     
-                    self.loadUserDataFromDatabase(withURL: self.profile.profilePhotoURL!)
+                    self.loadUserDataFromDatabase(withURL: self.profile?.profilePhotoURL!)
                     
+                    }
+                
                 }
                 
                 
@@ -161,17 +168,17 @@ class TravelerDashboardViewController: UIViewController,  UITableViewDelegate, U
                 return
             }
             
-            HUD.flash(.progress, delay: 1.0) { finished in
+            HUD.flash(.progress, delay: 0.0) { finished in
                 for child in snapshot.children.allObjects as? [FIRDataSnapshot] ?? [] {
                     let hostUID = child.key
                     self.hostUIDS.append(hostUID)
                     if let value = child.value as? [String: Any] {
-                        
+                        if (value["profileImageUrl"] != nil) {
                         let profile = Profile.init(isHost: true, displayName: value["displayName"] as! String,countriesVisiting: value["countriesVisiting"] as! String, userDescription: value["userDescription"] as! String, languagesSpoken: value["langsSpoken"] as! String, tagline: value["tagline"] as! String, dateOfBirth: value["DOB"] as! String, profilePhotoURL: value["profileImageUrl"] as! String, datesHelpNeeded: value["monthsHelpNeeded"] as! String, location: value["userLocation"] as! String)
                         
                         self.hosts.append(profile)
                         
-
+                        }
                         
                     }
                     
